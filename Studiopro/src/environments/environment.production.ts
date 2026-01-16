@@ -1,4 +1,6 @@
-let servicehost = 'http://localhost:5002/';
+// let servicehost = 'http://localhost:5002/';
+let servicehost = 'http://192.168.1.3:5001/';
+
 
 export const environment = {
   production: true,
