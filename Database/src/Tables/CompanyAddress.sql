@@ -1,0 +1,20 @@
+CREATE TABLE CompanyAddress(
+	CompanyAddressId INT IDENTITY(1,1) PRIMARY KEY,
+	CompanyId INT NOT NULL,
+	Label VARCHAR(100) NOT NULL,
+	Address VARCHAR(500) NOT NULL,
+	Area VARCHAR(200) NULL,
+	City VARCHAR(100)NOT NULL,
+	State VARCHAR(100)NOT NULL,
+	Pincode VARCHAR(10) NOT NULL,
+	Landmark VARCHAR(200) NULL,
+	IsPrimary  BIT NOT NULL DEFAULT 0,
+	Status INT NOT NULL,
+	CreatedBy INT Not Null,
+	CreatedDate DATETIME DEFAULT GETDATE() NOT NULL,
+	ModifiedBy INT null,
+	ModifiedDate DATETIME NULL
+
+	 CONSTRAINT FK_CompanyAddress_Company FOREIGN KEY (CompanyId) REFERENCES dbo.Company(CompanyId)
+
+);

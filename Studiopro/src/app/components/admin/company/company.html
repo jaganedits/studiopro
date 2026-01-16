@@ -1,0 +1,426 @@
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<div class="page-container">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <div class="header-title">
+        <h1>Company Settings</h1>
+        <span class="header-subtitle">Manage your studio information and preferences</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button pButton label="Save Changes" icon="pi pi-check" class="btn-custom" (click)="saveSettings()" [loading]="isSaving()"></button>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="form-content">
+    <div class="custom-tabs">
+      <button class="tab" [class.active]="activeTab() === 'general'" (click)="setActiveTab('general')">
+        <i class="pi pi-building"></i> General
+      </button>
+      <button class="tab" [class.active]="activeTab() === 'address'" (click)="setActiveTab('address')">
+        <i class="pi pi-map-marker"></i> Addresses
+      </button>
+    </div>
+
+    <!-- General Tab -->
+    @if (activeTab() === 'general') {
+      <form [formGroup]="companyForm" class="form-stack">
+
+        <!-- Logo & Branding Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <i class="pi pi-image"></i>
+            Logo & Branding
+          </div>
+          <div class="section-body">
+            <div class="branding-grid">
+              <!-- Logo Upload -->
+              <div class="upload-item">
+                <label class="upload-label">Studio Logo</label>
+                <div class="image-upload-container">
+                  @if (!logo()) {
+                    <!-- Upload Area -->
+                    <div class="upload-area" (click)="triggerLogoUpload()">
+                      <div class="upload-icon-wrapper">
+                        <i class="pi pi-cloud-upload"></i>
+                      </div>
+                      <p class="upload-title">Upload Logo</p>
+                      <p class="upload-hint">PNG, JPG (Max: 2MB, 200x200px)</p>
+                      <button pButton label="Choose Image" icon="pi pi-image" class="btn-custom btn-secondary btn-sm" (click)="$event.stopPropagation(); triggerLogoUpload()"></button>
+                    </div>
+                  } @else {
+                    <!-- Preview Area -->
+                    <div class="preview-area">
+                      <div class="image-wrapper">
+                        <img [src]="logo()" alt="Studio Logo" />
+                      </div>
+                      <div class="image-actions">
+                        <button pButton icon="pi pi-pencil" class="btn-custom btn-secondary btn-sm" pTooltip="Change" (click)="triggerLogoUpload()"></button>
+                        <button pButton icon="pi pi-trash" class="btn-custom btn-danger btn-sm" pTooltip="Remove" (click)="removeLogo()"></button>
+                      </div>
+                    </div>
+                  }
+                  <input type="file" #logoInput accept="image/*" (change)="onLogoSelected($event)" style="display: none;" />
+                </div>
+              </div>
+
+              <!-- Signature Upload -->
+              <div class="upload-item">
+                <label class="upload-label">Signature</label>
+                <div class="image-upload-container">
+                  @if (!signature()) {
+                    <!-- Upload Area -->
+                    <div class="upload-area signature-area" (click)="triggerSignatureUpload()">
+                      <div class="upload-icon-wrapper">
+                        <i class="pi pi-pencil"></i>
+                      </div>
+                      <p class="upload-title">Upload Signature</p>
+                      <p class="upload-hint">PNG with transparent background</p>
+                      <button pButton label="Choose Image" icon="pi pi-image" class="btn-custom btn-secondary btn-sm" (click)="$event.stopPropagation(); triggerSignatureUpload()"></button>
+                    </div>
+                  } @else {
+                    <!-- Preview Area -->
+                    <div class="preview-area signature-preview-area">
+                      <div class="image-wrapper signature-wrapper">
+                        <img [src]="signature()" alt="Signature" />
+                      </div>
+                      <div class="image-actions">
+                        <button pButton icon="pi pi-pencil" class="btn-custom btn-secondary btn-sm" pTooltip="Change" (click)="triggerSignatureUpload()"></button>
+                        <button pButton icon="pi pi-trash" class="btn-custom btn-danger btn-sm" pTooltip="Remove" (click)="removeSignature()"></button>
+                      </div>
+                    </div>
+                  }
+                  <input type="file" #signatureInput accept="image/*" (change)="onSignatureSelected($event)" style="display: none;" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Business Information Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <i class="pi pi-building"></i>
+            Business Information
+          </div>
+          <div class="section-body">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="CompanyName">Company Name <span class="required">*</span></label>
+                <input pInputText id="CompanyName" formControlName="CompanyName" placeholder="Enter company name"
+                       [class]="{'ng-invalid ng-dirty': isFieldInvalid('CompanyName')}" />
+                <p-message *ngIf="isFieldInvalid('CompanyName')" severity="error" text="{{ getFieldError('CompanyName') }}"></p-message>
+              </div>
+
+              <div class="form-group">
+                <label for="Tagline">Tagline / Slogan</label>
+                <input pInputText id="Tagline" formControlName="Tagline" placeholder="Your studio tagline" />
+              </div>
+
+              <div class="form-group">
+                <label for="Phone">Phone <span class="required">*</span></label>
+                <input pInputText id="Phone" formControlName="Phone" placeholder="+91 XXXXX XXXXX"
+                       [class]="{'ng-invalid ng-dirty': isFieldInvalid('Phone')}" />
+                <p-message *ngIf="isFieldInvalid('Phone')" severity="error" text="{{ getFieldError('Phone') }}"></p-message>
+              </div>
+
+              <div class="form-group">
+                <label for="AlternatePhone">Alternate Phone</label>
+                <input pInputText id="AlternatePhone" formControlName="AlternatePhone" placeholder="+91 XXXXX XXXXX" />
+              </div>
+
+              <div class="form-group">
+                <label for="Email">Email</label>
+                <input pInputText id="Email" formControlName="Email" type="email" placeholder="email@example.com"
+                       [class]="{'ng-invalid ng-dirty': isFieldInvalid('Email')}" />
+                <p-message *ngIf="isFieldInvalid('Email')" severity="error" text="{{ getFieldError('Email') }}"></p-message>
+              </div>
+
+              <div class="form-group">
+                <label for="Website">Website</label>
+                <input pInputText id="Website" formControlName="Website" placeholder="www.example.com" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Media Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <i class="pi pi-share-alt"></i>
+            Social Media
+          </div>
+          <div class="section-body">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="Whatsapp">WhatsApp</label>
+                <input pInputText id="Whatsapp" formControlName="Whatsapp" placeholder="+91 XXXXX XXXXX" />
+              </div>
+
+              <div class="form-group">
+                <label for="Instagram">Instagram</label>
+                <input pInputText id="Instagram" formControlName="Instagram" placeholder="@yourstudio" />
+              </div>
+
+              <div class="form-group">
+                <label for="Facebook">Facebook</label>
+                <input pInputText id="Facebook" formControlName="Facebook" placeholder="facebook.com/yourstudio" />
+              </div>
+
+              <div class="form-group">
+                <label for="Youtube">YouTube</label>
+                <input pInputText id="Youtube" formControlName="Youtube" placeholder="youtube.com/@yourstudio" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tax Information Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <i class="pi pi-file"></i>
+            Tax Information
+          </div>
+          <div class="section-body">
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="GstNumber">GST Number</label>
+                <input pInputText id="GstNumber" formControlName="GstNumber" placeholder="Enter GST number" />
+              </div>
+
+              <div class="form-group">
+                <label for="PanNumber">PAN Number</label>
+                <input pInputText id="PanNumber" formControlName="PanNumber" placeholder="Enter PAN number" />
+              </div>
+
+              <div class="form-group">
+                <label for="CinNumber">CIN Number</label>
+                <input pInputText id="CinNumber" formControlName="CinNumber" placeholder="Enter CIN number (if applicable)" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bank Details Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <i class="pi pi-wallet"></i>
+            Bank Details
+          </div>
+          <div class="section-body">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="BankName">Bank Name</label>
+                <input pInputText id="BankName" formControlName="BankName" placeholder="Enter bank name" />
+              </div>
+
+              <div class="form-group">
+                <label for="BranchName">Branch Name</label>
+                <input pInputText id="BranchName" formControlName="BranchName" placeholder="Enter branch name" />
+              </div>
+
+              <div class="form-group">
+                <label for="AccountHolderName">Account Holder Name</label>
+                <input pInputText id="AccountHolderName" formControlName="AccountHolderName" placeholder="Enter account holder name" />
+              </div>
+
+              <div class="form-group">
+                <label for="AccountNumber">Account Number</label>
+                <input pInputText id="AccountNumber" formControlName="AccountNumber" placeholder="Enter account number" />
+              </div>
+
+              <div class="form-group">
+                <label for="IfscCode">IFSC Code</label>
+                <input pInputText id="IfscCode" formControlName="IfscCode" placeholder="Enter IFSC code" />
+              </div>
+
+              <div class="form-group">
+                <label for="UpiId">UPI ID</label>
+                <input pInputText id="UpiId" formControlName="UpiId" placeholder="Enter UPI ID" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invoice Settings Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <i class="pi pi-receipt"></i>
+            Invoice Settings
+          </div>
+          <div class="section-body">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="InvoicePrefix">Invoice Prefix</label>
+                <input pInputText id="InvoicePrefix" formControlName="InvoicePrefix" placeholder="e.g., INV, BILL" />
+              </div>
+
+              <div class="form-group">
+                <label for="InvoiceStartNumber">Invoice Start Number</label>
+                <input pInputText id="InvoiceStartNumber" formControlName="InvoiceStartNumber" type="number" placeholder="e.g., 1001" />
+              </div>
+
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label for="TermsConditions">Terms & Conditions</label>
+                <textarea pTextarea id="TermsConditions" formControlName="TermsConditions" rows="5" placeholder="Enter terms and conditions that will appear on invoices"></textarea>
+              </div>
+
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label for="FooterNote">Invoice Footer Note</label>
+                <input pInputText id="FooterNote" formControlName="FooterNote" placeholder="Thank you message or footer note" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    }
+
+    <!-- Address Tab -->
+    @if (activeTab() === 'address') {
+      <div class="form-stack">
+        <div class="form-section">
+          <div class="section-header">
+            <i class="pi pi-map-marker"></i>
+            Studio Addresses
+            <button pButton icon="pi pi-plus" label="Add Address" class="btn-custom btn-sm" style="margin-left: auto;" (click)="openAddressDialog()"></button>
+          </div>
+          <div class="section-body" style="padding: 0;">
+            <p-table [value]="addresses()" [tableStyle]="{'min-width': '100%'}" styleClass="p-datatable-sm">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Label</th>
+                  <th>Address</th>
+                  <th>City</th>
+                  <th style="width: 80px; text-align: center;">Actions</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-address>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                      <span>{{ address.Label }}</span>
+                      @if (address.IsPrimary) {
+                        <span class="custom-badge badge-success">Primary</span>
+                      }
+                    </div>
+                  </td>
+                  <td>{{ address.Address }}, {{ address.Area }}</td>
+                  <td>{{ address.City }}, {{ address.State }} - {{ address.Pincode }}</td>
+                  <td>
+                    <div class="action-buttons" style="justify-content: center;">
+                      <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" pTooltip="Edit" (click)="openAddressDialog(address)"></button>
+                      <button pButton icon="pi pi-trash" class="p-button-text p-button-danger p-button-sm" pTooltip="Delete" (click)="deleteAddress(address)"></button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="4">
+                    <div class="empty-state">
+                      <i class="pi pi-map-marker" style="font-size: 2rem; color: var(--muted);"></i>
+                      <p>No addresses added yet</p>
+                      <button pButton label="Add Your First Address" icon="pi pi-plus" class="btn-custom btn-sm" (click)="openAddressDialog()"></button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Mobile Footer Actions -->
+  <div class="footer-actions">
+    <button pButton label="Save Changes" icon="pi pi-check" class="btn-custom w-full" (click)="saveSettings()" [loading]="isSaving()"></button>
+  </div>
+</div>
+
+<!-- Address Dialog -->
+<p-dialog
+  [header]="dialogHeader()"
+  [(visible)]="showAddressDialog"
+  [modal]="true"
+  [style]="{width: '500px'}"
+  [draggable]="false"
+  [resizable]="false">
+
+  <form [formGroup]="addressForm" class="form-stack" style="gap: 1rem;">
+    <div class="form-group">
+      <label for="Label">Label <span class="required">*</span></label>
+      <input pInputText id="Label" formControlName="Label" placeholder="e.g., Main Studio, Branch Office"
+             [class]="{'ng-invalid ng-dirty': isAddressFieldInvalid('Label')}" />
+      <p-message *ngIf="isAddressFieldInvalid('Label')" severity="error" text="{{ getAddressFieldError('Label') }}"></p-message>
+    </div>
+
+    <div class="form-group">
+      <label for="Address">Address <span class="required">*</span></label>
+      <input pInputText id="Address" formControlName="Address" placeholder="Street address, building name"
+             [class]="{'ng-invalid ng-dirty': isAddressFieldInvalid('Address')}" />
+      <p-message *ngIf="isAddressFieldInvalid('Address')" severity="error" text="{{ getAddressFieldError('Address') }}"></p-message>
+    </div>
+
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label for="Area">Area / Locality</label>
+        <input pInputText id="Area" formControlName="Area" placeholder="Area or locality" />
+      </div>
+
+      <div class="form-group">
+        <label for="Landmark">Landmark</label>
+        <input pInputText id="Landmark" formControlName="Landmark" placeholder="Nearby landmark" />
+      </div>
+    </div>
+
+    <div class="form-grid-3">
+      <div class="form-group">
+        <label for="City">City <span class="required">*</span></label>
+        <input pInputText id="City" formControlName="City" placeholder="City"
+               [class]="{'ng-invalid ng-dirty': isAddressFieldInvalid('City')}" />
+        <p-message *ngIf="isAddressFieldInvalid('City')" severity="error" text="{{ getAddressFieldError('City') }}"></p-message>
+      </div>
+
+      <div class="form-group">
+        <label for="State">State <span class="required">*</span></label>
+        <input pInputText id="State" formControlName="State" placeholder="State"
+               [class]="{'ng-invalid ng-dirty': isAddressFieldInvalid('State')}" />
+        <p-message *ngIf="isAddressFieldInvalid('State')" severity="error" text="{{ getAddressFieldError('State') }}"></p-message>
+      </div>
+
+      <div class="form-group">
+        <label for="Pincode">Pincode <span class="required">*</span></label>
+        <input pInputText id="Pincode" formControlName="Pincode" placeholder="Pincode"
+               [class]="{'ng-invalid ng-dirty': isAddressFieldInvalid('Pincode')}" />
+        <p-message *ngIf="isAddressFieldInvalid('Pincode')" severity="error" text="{{ getAddressFieldError('Pincode') }}"></p-message>
+      </div>
+    </div>
+
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label for="AddressStatus">Status <span class="required">*</span></label>
+        <p-select id="AddressStatus" formControlName="Status" [options]="statusOptions()" appendTo="body"
+            optionLabel="DisplayName" optionValue="MetadataId" styleClass="w-full"
+            [class]="{'ng-invalid ng-dirty': isAddressFieldInvalid('Status')}">
+        </p-select>
+        <p-message *ngIf="isAddressFieldInvalid('Status')" severity="error" text="{{ getAddressFieldError('Status') }}"></p-message>
+      </div>
+
+      <div class="form-group" style="flex-direction: row; align-items: center; gap: 0.5rem; padding-top: 1.5rem;">
+        <p-checkbox formControlName="IsPrimary" [binary]="true" inputId="IsPrimary"></p-checkbox>
+        <label for="IsPrimary" style="margin: 0; text-transform: none; font-size: 0.85rem;">Set as Primary Address</label>
+      </div>
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <button pButton label="Cancel" class="btn-custom btn-secondary" (click)="closeAddressDialog()"></button>
+    <button pButton label="Save Address" icon="pi pi-check" class="btn-custom" (click)="saveAddress()"></button>
+  </ng-template>
+</p-dialog>

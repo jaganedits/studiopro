@@ -1,0 +1,37 @@
+<form [formGroup]="roleForm" class="form-section">
+    <div class="form-grid">
+        <!-- Role Code Field -->
+        <div class="form-field">
+            <label for="RoleCode">Role Code <span class="required">*</span></label>
+            <input pInputText id="RoleCode" formControlName="RoleCode" placeholder="e.g., manager"
+                [class]="{'ng-invalid ng-dirty': isFieldInvalid('RoleCode')}" />
+
+            <!-- PrimeNG Error Message for RoleCode -->
+            <p-message *ngIf="isFieldInvalid('RoleCode')" severity="error" text="{{ getFieldError('RoleCode') }}">
+            </p-message>
+        </div>
+
+        <!-- Role Name Field -->
+        <div class="form-field">
+            <label for="RoleName">Role Name <span class="required">*</span></label>
+            <input pInputText id="RoleName" formControlName="RoleName" placeholder="Enter role name" />
+
+            <!-- PrimeNG Error Message for RoleName -->
+            <p-message *ngIf="isFieldInvalid('RoleName')" severity="error" text="{{ getFieldError('RoleName') }}">
+            </p-message>
+        </div>
+
+        <!-- Status Field -->
+        <div class="form-field">
+            <label for="Status">Status <span class="required">*</span></label>
+            <p-select id="Status" formControlName="Status" [options]="statusOptions()" appendTo="body"
+                optionLabel="DisplayName" optionValue="MetadataId" styleClass="w-full"
+                [class]="{'ng-invalid ng-dirty': isFieldInvalid('Status')}">
+            </p-select>
+
+            <!-- PrimeNG Error Message for Status -->
+            <p-message *ngIf="isFieldInvalid('Status')" severity="error" text="{{ getFieldError('Status') }}">
+            </p-message>
+        </div>
+    </div>
+</form>

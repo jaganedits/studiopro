@@ -1,0 +1,83 @@
+<div class="app-container" [class.sidebar-collapsed]="isCollapsed">
+  <aside class="sidebar" [class.collapsed]="isCollapsed">
+    <div class="sidebar-header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+            <circle cx="12" cy="13" r="4" />
+          </svg>
+        </div>
+        <h1>Studio Pro</h1>
+      </div>
+      <div class="header-actions">
+        <button
+          class="icon-btn"
+          (click)="toggleTheme()"
+          pTooltip="Toggle theme"
+          tooltipPosition="right"
+          [tooltipDisabled]="!isCollapsed">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5" />
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+          </svg>
+        </button>
+        <button
+          class="icon-btn collapse-btn"
+          (click)="toggleSidebar()"
+          pTooltip="{{isCollapsed ? 'Expand' : 'Collapse'}}"
+          tooltipPosition="right"
+          [tooltipDisabled]="!isCollapsed">
+          <svg class="collapse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 17l-5-5 5-5M18 17l-5-5 5-5" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="user-info"
+      pTooltip="{{userName}} - {{userRole}}"
+      tooltipPosition="right"
+      [tooltipDisabled]="!isCollapsed">
+      <div class="user-avatar-wrapper">
+        <p-avatar
+          [label]="userInitial"
+          styleClass="user-avatar-prime"
+          shape="circle"
+          size="normal">
+        </p-avatar>
+        <span class="status-badge"></span>
+      </div>
+      <div class="user-details">
+        <h4>{{ userName }}</h4>
+        <span>{{ userRole }}</span>
+      </div>
+    </div>
+
+    <!-- PanelMenu Navigation -->
+    <div class="nav-sections">
+      <p-panelMenu
+        [model]="menuItems"
+        [multiple]="true"
+        styleClass="studio-panel-menu" />
+    </div>
+
+    <!-- Logout Button -->
+    <div class="nav-footer">
+      <div
+        class="logout-item"
+        (click)="logout()"
+        pTooltip="Logout"
+        tooltipPosition="right"
+        [tooltipDisabled]="!isCollapsed">
+        <i class="pi pi-sign-out"></i>
+        <span>Logout</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -1,0 +1,84 @@
+<div class="error-page">
+  <div class="error-container">
+    <!-- Animated lock illustration -->
+    <div class="error-illustration">
+      <div class="lock-container">
+        <div class="lock-body">
+          <div class="lock-shackle" [class.forbidden]="errorCode === 403"></div>
+          <div class="lock-keyhole"></div>
+        </div>
+        <div class="shield-badge">
+          <i class="pi" [class.pi-lock]="errorCode === 401" [class.pi-ban]="errorCode === 403"></i>
+        </div>
+      </div>
+      <div class="pulse-rings">
+        <div class="pulse-ring pulse-ring-1"></div>
+        <div class="pulse-ring pulse-ring-2"></div>
+        <div class="pulse-ring pulse-ring-3"></div>
+      </div>
+    </div>
+
+    <!-- Error code badge -->
+    <div class="error-badge">
+      <span class="error-code">{{ errorCode }}</span>
+      <span class="error-label">ERROR</span>
+    </div>
+
+    <!-- Error content -->
+    <div class="error-content">
+      <h1 class="error-title">{{ errorTitle }}</h1>
+      <p class="error-description">{{ errorMessage }}</p>
+
+      <!-- Security notice -->
+      <div class="security-notice">
+        <div class="notice-icon">
+          <i class="pi pi-shield"></i>
+        </div>
+        <div class="notice-content">
+          <span class="notice-title">Security Notice</span>
+          <span class="notice-text">
+            @if (errorCode === 401) {
+              Your session may have expired or you haven't logged in yet.
+            } @else {
+              This resource requires elevated privileges that your account doesn't have.
+            }
+          </span>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="error-actions">
+        @if (errorCode === 401) {
+          <p-button
+            label="Sign In"
+            icon="pi pi-sign-in"
+            (onClick)="goToLogin()"
+            styleClass="p-button-primary">
+          </p-button>
+        } @else {
+          <p-button
+            label="Go to Dashboard"
+            icon="pi pi-home"
+            (onClick)="goHome()"
+            styleClass="p-button-primary">
+          </p-button>
+        }
+        <p-button
+          label="Go Back"
+          icon="pi pi-arrow-left"
+          (onClick)="goBack()"
+          styleClass="p-button-outlined">
+        </p-button>
+      </div>
+
+      <!-- Help link -->
+      <div class="help-link">
+        <span>Need help?</span>
+        <a href="mailto:support@example.com">Contact Support</a>
+      </div>
+    </div>
+
+    <!-- Decorative grid -->
+    <div class="security-grid"></div>
+  </div>
+</div>

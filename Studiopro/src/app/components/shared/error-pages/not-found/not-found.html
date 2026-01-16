@@ -1,0 +1,56 @@
+<div class="error-page">
+  <div class="error-container">
+    <!-- Animated 404 illustration -->
+    <div class="error-illustration">
+      <div class="glitch-wrapper">
+        <div class="glitch" data-text="404">404</div>
+      </div>
+      <div class="error-orbit">
+        <div class="orbit-ring"></div>
+        <div class="orbit-dot"></div>
+      </div>
+    </div>
+
+    <!-- Error content -->
+    <div class="error-content">
+      <h1 class="error-title">Page Not Found</h1>
+      <p class="error-description">
+        Oops! The page you're looking for seems to have wandered off into the digital void.
+        It might have been moved, deleted, or never existed in the first place.
+      </p>
+
+      <!-- Quick suggestions -->
+      <div class="error-suggestions">
+        <span class="suggestion-label">Quick suggestions:</span>
+        <ul>
+          <li>Check the URL for typos</li>
+          <li>Go back to the previous page</li>
+          <li>Return to the dashboard</li>
+        </ul>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="error-actions">
+        <p-button
+          label="Go to Dashboard"
+          icon="pi pi-home"
+          (onClick)="goHome()"
+          styleClass="p-button-primary">
+        </p-button>
+        <p-button
+          label="Go Back"
+          icon="pi pi-arrow-left"
+          (onClick)="goBack()"
+          styleClass="p-button-outlined">
+        </p-button>
+      </div>
+    </div>
+
+    <!-- Decorative elements -->
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+  </div>
+</div>

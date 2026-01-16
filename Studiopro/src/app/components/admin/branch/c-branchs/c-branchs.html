@@ -1,0 +1,121 @@
+<div class="page-container">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="header-left">
+            <button class="btn-back" (click)="goBack()">
+                <i class="pi pi-arrow-left"></i>
+            </button>
+            <div class="header-title">
+                <h1>{{ isViewMode() ? 'View Branch' : (isEditMode() ? 'Edit Branch' : 'Create Branch') }}</h1>
+                <span class="header-subtitle">{{ isViewMode() ? 'Branch details' : (isEditMode() ? 'Update branch information' : 'Add a new branch to the system') }}</span>
+            </div>
+        </div>
+        <div class="header-actions">
+            @if (!isViewMode()) {
+                <p-button label="Clear" icon="pi pi-eraser" severity="secondary" [outlined]="true" (click)="clearForm()" />
+                <p-button label="Cancel" icon="pi pi-times" severity="secondary" [outlined]="true" (click)="goBack()" />
+                <p-button label="Save Branch" icon="pi pi-check" severity="primary" (click)="saveBranch()" [loading]="isSaving()" />
+            } @else {
+                <p-button label="Back" icon="pi pi-arrow-left" severity="secondary" [outlined]="true" (click)="goBack()" />
+            }
+        </div>
+    </div>
+
+    <!-- Form Content -->
+    <form [formGroup]="branchForm" class="form-content" style="max-width: 600px; margin: 0 auto;">
+        <div class="form-section">
+            <div class="section-header">
+                <i class="pi pi-building"></i>
+                <span>Branch Information</span>
+            </div>
+            <div class="section-body">
+                <div class="form-stack">
+                    <!-- Branch Code - Shown in Edit/View mode (disabled) -->
+                    @if (isEditMode() || isViewMode()) {
+                        <div class="form-group">
+                            <label for="BranchCode">Branch Code</label>
+                            <input pInputText id="BranchCode" formControlName="BranchCode" placeholder="e.g., BR01" />
+                        </div>
+                    }
+
+                    <!-- Branch Name -->
+                    <div class="form-group">
+                        <label for="BranchName">Branch Name <span class="required">*</span></label>
+                        <input pInputText id="BranchName" formControlName="BranchName" placeholder="Enter branch name" />
+                        @if (branchForm.get('BranchName')?.invalid && branchForm.get('BranchName')?.touched) {
+                            <small class="error-message">
+                                @if (branchForm.get('BranchName')?.errors?.['required']) {
+                                    Branch Name is required
+                                }
+                                @if (branchForm.get('BranchName')?.errors?.['maxlength']) {
+                                    Maximum 100 characters
+                                }
+                            </small>
+                        }
+                    </div>
+
+                    <!-- Address -->
+                    <div class="form-group">
+                        <label for="Address">Address</label>
+                        <textarea pTextarea id="Address" formControlName="Address"
+                            placeholder="Enter branch address" [rows]="3" [autoResize]="true"></textarea>
+                        @if (branchForm.get('Address')?.invalid && branchForm.get('Address')?.touched) {
+                            <small class="error-message">
+                                @if (branchForm.get('Address')?.errors?.['maxlength']) {
+                                    Maximum 500 characters
+                                }
+                            </small>
+                        }
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="form-group">
+                        <label for="Phone">Phone</label>
+                        <input pInputText id="Phone" formControlName="Phone" placeholder="+91 XXXXX XXXXX" />
+                        @if (branchForm.get('Phone')?.invalid && branchForm.get('Phone')?.touched) {
+                            <small class="error-message">
+                                @if (branchForm.get('Phone')?.errors?.['maxlength']) {
+                                    Maximum 20 characters
+                                }
+                            </small>
+                        }
+                    </div>
+
+                    <!-- Manager -->
+                    <div class="form-group">
+                        <label for="Manager">Manager</label>
+                        <p-select id="Manager" formControlName="Manager" placeholder="Select manager"
+                            [options]="userList()" optionLabel="FullName" optionValue="UserId"
+                            styleClass="w-full" />
+                    </div>
+
+                    <!-- Status -->
+                    <div class="form-group">
+                        <label for="Status">Status <span class="required">*</span></label>
+                        <p-select id="Status" formControlName="Status" [options]="statusList()"
+                            optionLabel="DisplayName" optionValue="MetadataId" placeholder="Select Status"
+                            styleClass="w-full" />
+                        @if (branchForm.get('Status')?.invalid && branchForm.get('Status')?.touched) {
+                            <small class="error-message">
+                                @if (branchForm.get('Status')?.errors?.['required']) {
+                                    Status is required
+                                }
+                            </small>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Footer Actions (Mobile) -->
+    @if (!isViewMode()) {
+        <div class="footer-actions">
+            <p-button label="Cancel" icon="pi pi-times" severity="secondary" [outlined]="true" (click)="goBack()" styleClass="flex-1" />
+            <p-button label="Save Branch" icon="pi pi-check" severity="primary" (click)="saveBranch()" [loading]="isSaving()" styleClass="flex-1" />
+        </div>
+    }
+</div>
+
+<!-- Toast Messages -->
+<p-toast position="bottom-right" key="br" />

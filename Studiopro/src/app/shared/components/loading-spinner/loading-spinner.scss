@@ -1,0 +1,325 @@
+// ============================================
+// PHOTOGRAPHY ICON LOADING SPINNER
+// Works with both dark (default) and light themes
+// ============================================
+
+.page-loader {
+  // Dark theme (default)
+  --loader-bg: rgba(10, 10, 10, 0.98);
+  --icon-stroke: #a0aec0;
+  --icon-fill: #818cf8;
+  --lens-glow: rgba(129, 140, 248, 0.5);
+  --flash-color: #fcd34d;
+  --shutter-color: #f87171;
+  --text-primary: #818cf8;
+  --text-secondary: #68d391;
+  --progress-bg: #2d3748;
+  --progress-fill: linear-gradient(90deg, #818cf8 0%, #68d391 100%);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--loader-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  backdrop-filter: blur(8px);
+}
+
+// Light theme
+.light-mode .page-loader,
+:host-context(.light-mode) .page-loader {
+  --loader-bg: rgba(250, 250, 250, 0.98);
+  --icon-stroke: #4a5568;
+  --icon-fill: #6366f1;
+  --lens-glow: rgba(99, 102, 241, 0.4);
+  --flash-color: #f59e0b;
+  --shutter-color: #ef4444;
+  --text-primary: #6366f1;
+  --text-secondary: #22c55e;
+  --progress-bg: #e5e5e5;
+  --progress-fill: linear-gradient(90deg, #6366f1 0%, #22c55e 100%);
+}
+
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+// ============================================
+// ICON LOADER
+// ============================================
+.icon-loader {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-icon {
+  width: 64px;
+  height: 64px;
+  animation: iconBounce 2s ease-in-out infinite;
+
+  .camera-body {
+    stroke: var(--icon-stroke);
+    fill: none;
+    animation: bodyPulse 2s ease-in-out infinite;
+  }
+
+  .flash {
+    fill: var(--flash-color);
+    opacity: 0.8;
+    animation: flashBlink 3s ease-in-out infinite;
+  }
+
+  .viewfinder {
+    stroke: var(--icon-stroke);
+    fill: none;
+  }
+
+  .lens-outer {
+    stroke: var(--icon-fill);
+    fill: none;
+    animation: lensRotate 3s linear infinite;
+    transform-origin: 32px 36px;
+  }
+
+  .lens-inner {
+    stroke: var(--icon-stroke);
+    fill: none;
+    opacity: 0.6;
+    animation: lensPulse 2s ease-in-out infinite;
+    transform-origin: 32px 36px;
+  }
+
+  .lens-center {
+    fill: var(--icon-fill);
+    animation: aperturePulse 2s ease-in-out infinite;
+    transform-origin: 32px 36px;
+  }
+
+  .shutter-btn {
+    fill: var(--shutter-color);
+    animation: shutterPress 3s ease-in-out infinite;
+  }
+}
+
+// Focus ring around icon
+.focus-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90px;
+  height: 90px;
+  border: 2px solid var(--icon-fill);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: focusRingPulse 2s ease-out infinite;
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+@keyframes iconBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes bodyPulse {
+  0%, 100% {
+    stroke-opacity: 1;
+  }
+  50% {
+    stroke-opacity: 0.7;
+  }
+}
+
+@keyframes flashBlink {
+  0%, 85%, 100% {
+    opacity: 0.5;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  90% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px var(--flash-color));
+  }
+}
+
+@keyframes lensRotate {
+  0% {
+    stroke-dasharray: 88;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 88;
+    stroke-dashoffset: 44;
+  }
+  100% {
+    stroke-dasharray: 88;
+    stroke-dashoffset: 88;
+  }
+}
+
+@keyframes lensPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(0.9);
+    opacity: 0.4;
+  }
+}
+
+@keyframes aperturePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.7);
+    opacity: 0.6;
+  }
+}
+
+@keyframes shutterPress {
+  0%, 85%, 100% {
+    transform: translateY(0);
+  }
+  90% {
+    transform: translateY(2px);
+  }
+}
+
+@keyframes focusRingPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0;
+  }
+}
+
+// ============================================
+// LOADING TEXT
+// ============================================
+.loading-text {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+
+  span {
+    font-size: 22px;
+    font-weight: 700;
+    font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+    color: var(--text-primary);
+    animation: textWave 1.5s ease-in-out infinite;
+
+    &.space {
+      width: 6px;
+    }
+
+    &.pro {
+      color: var(--text-secondary);
+    }
+
+    &:nth-child(1) { animation-delay: 0s; }
+    &:nth-child(2) { animation-delay: 0.05s; }
+    &:nth-child(3) { animation-delay: 0.1s; }
+    &:nth-child(4) { animation-delay: 0.15s; }
+    &:nth-child(5) { animation-delay: 0.2s; }
+    &:nth-child(6) { animation-delay: 0.25s; }
+    &:nth-child(7) { animation-delay: 0.3s; }
+    &:nth-child(8) { animation-delay: 0.35s; }
+    &:nth-child(9) { animation-delay: 0.4s; }
+    &:nth-child(10) { animation-delay: 0.45s; }
+  }
+}
+
+@keyframes textWave {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 0.7;
+  }
+}
+
+// ============================================
+// PROGRESS BAR
+// ============================================
+.progress-bar {
+  width: 120px;
+  height: 3px;
+  background: var(--progress-bg);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 40%;
+  height: 100%;
+  background: var(--progress-fill);
+  border-radius: 2px;
+  animation: progressMove 1.5s ease-in-out infinite;
+}
+
+@keyframes progressMove {
+  0% {
+    width: 0%;
+    margin-left: 0%;
+  }
+  50% {
+    width: 60%;
+    margin-left: 20%;
+  }
+  100% {
+    width: 0%;
+    margin-left: 100%;
+  }
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+@media (max-width: 480px) {
+  .icon-loader {
+    width: 70px;
+    height: 70px;
+  }
+
+  .camera-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .focus-ring {
+    width: 80px;
+    height: 80px;
+  }
+
+  .loading-text span {
+    font-size: 18px;
+  }
+
+  .progress-bar {
+    width: 100px;
+  }
+}

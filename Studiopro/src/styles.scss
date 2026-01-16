@@ -1,0 +1,3258 @@
+/* You can add global styles to this file, and also import other style files */
+// Studio Pro - Global Styles
+@import 'primeflex/primeflex.css';
+@import 'primeicons/primeicons.css';
+
+// ============================================
+// THEME VARIABLES
+// ============================================
+:root {
+  // Dark theme - rich dark with subtle blue undertones
+  --bg: #09090b;
+  --bg2: #18181b;
+  --bg3: #27272a;
+  --card: #18181b;
+  --card-elevated: #1f1f23;
+  --hover: #27272a;
+  --accent: #a78bfa;
+  --accent-subtle: rgba(167, 139, 250, 0.15);
+  --text: #fafafa;
+  --text2: #a1a1aa;
+  --muted: #71717a;
+  --border: #27272a;
+  --border2: #3f3f46;
+  --success: #22c55e;
+  --success-bg: rgba(34, 197, 94, 0.15);
+  --warning: #f59e0b;
+  --warning-bg: rgba(245, 158, 11, 0.15);
+  --danger: #ef4444;
+  --danger-bg: rgba(239, 68, 68, 0.15);
+  --info: #3b82f6;
+  --info-bg: rgba(59, 130, 246, 0.15);
+  --primary: #8b5cf6;
+  --primary-bg: rgba(139, 92, 246, 0.15);
+
+  // Shadows for dark mode
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.15);
+
+  // Typography
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+
+  // Font weights
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  // Letter spacing
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+// Light mode - clean with subtle violet accent
+.light-mode {
+  --bg: #fafafa;
+  --bg2: #ffffff;
+  --bg3: #f4f4f5;
+  --card: #ffffff;
+  --card-elevated: #ffffff;
+  --hover: #f4f4f5;
+  --accent: #7c3aed;
+  --accent-subtle: rgba(124, 58, 237, 0.1);
+  --text: #18181b;
+  --text2: #52525b;
+  --muted: #71717a;
+  --border: #e4e4e7;
+  --border2: #d4d4d8;
+  --success: #16a34a;
+  --success-bg: rgba(22, 163, 74, 0.1);
+  --warning: #ca8a04;
+  --warning-bg: rgba(202, 138, 4, 0.1);
+  --danger: #dc2626;
+  --danger-bg: rgba(220, 38, 38, 0.1);
+  --info: #2563eb;
+  --info-bg: rgba(37, 99, 235, 0.1);
+  --primary: #7c3aed;
+  --primary-bg: rgba(124, 58, 237, 0.1);
+
+  // Shadows for light mode
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 20px rgba(124, 58, 237, 0.1);
+}
+
+// ============================================
+// RESET & BASE
+// ============================================
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: var(--font-normal);
+  letter-spacing: var(--tracking-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: var(--font-bold);
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1.125rem;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: 0.875rem;
+}
+
+// Code and monospace
+code,
+pre,
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border2);
+  border-radius: 3px;
+
+  &:hover {
+    background: var(--muted);
+  }
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.25s ease-out;
+}
+
+// ============================================
+// LAYOUT UTILITIES
+// ============================================
+.page-section {
+  padding: 1rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+
+  h1 {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: var(--font-semibold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text);
+    margin: 0;
+  }
+
+  .page-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: var(--font-semibold);
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: 0.25rem;
+    color: var(--text);
+  }
+
+  .page-subtitle {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: var(--font-normal);
+    color: var(--muted);
+    letter-spacing: var(--tracking-normal);
+  }
+}
+
+// ============================================
+// CREATE/EDIT FORM PAGE STYLES
+// Used by c-users, c-branchs, c-role, etc.
+// ============================================
+
+// Page Container for form pages
+.page-container {
+  padding: 0;
+  animation: fadeIn 0.25s ease-out;
+
+  @media (max-width: 768px) {
+    padding-bottom: 5rem; // Space for fixed footer
+  }
+}
+
+// Header with back button and actions
+.page-container .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin: 0;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .btn-back {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      color: var(--text2);
+      transition: all 0.15s ease;
+      outline: none;
+
+      i {
+        font-size: 16px;
+      }
+
+      &:hover {
+        background: var(--hover);
+        color: var(--text);
+        border-color: var(--border2);
+      }
+
+      &:focus-visible {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+      }
+    }
+
+    .header-title {
+      h1 {
+        font-size: 1.5rem;
+        margin: 0 0 0.25rem 0;
+        color: var(--text);
+      }
+
+      .header-subtitle {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 0.5rem;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+}
+
+// Form content area - centered with max-width
+.form-content {
+  width: 100%;
+  padding: 1rem;
+}
+
+// Form Stack - Vertical layout for form fields
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+// Form Section - Card-like container for form fields
+.form-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.75rem 1rem;
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text2);
+
+    i {
+      font-size: 16px;
+      color: var(--primary);
+    }
+  }
+
+  .section-body {
+    padding: 1rem;
+  }
+}
+
+// Form Group - Individual field container
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    .required {
+      color: var(--danger);
+      margin-left: 2px;
+    }
+  }
+}
+
+// Footer Actions (Mobile) - Fixed at bottom
+.footer-actions {
+  display: none;
+  padding: 1rem;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  gap: 0.75rem;
+  z-index: 100;
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ============================================
+// CUSTOM BUTTONS
+// ============================================
+.btn-custom {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-normal);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  outline: none;
+  box-shadow: var(--shadow-sm);
+
+  // Default is primary style (violet accent)
+  background: var(--primary);
+  color: #fff;
+
+  &:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+  }
+
+  &:active {
+    transform: translateY(0);
+    filter: brightness(0.95);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px var(--primary-bg);
+  }
+
+  &.btn-primary {
+    background: var(--primary);
+    color: #fff;
+
+    &:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &.btn-secondary {
+    background: var(--bg3);
+    color: var(--text);
+    border-color: var(--border);
+
+    &:hover {
+      background: var(--hover);
+      border-color: var(--border2);
+    }
+
+    &:active {
+      background: var(--bg2);
+    }
+  }
+
+  &.btn-danger {
+    background: transparent;
+    color: var(--danger);
+    border-color: var(--danger-bg);
+
+    &:hover {
+      background: var(--danger);
+      color: #fff;
+      border-color: var(--danger);
+    }
+
+    &:active {
+      filter: brightness(0.9);
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 3px var(--danger-bg);
+    }
+  }
+
+  &.btn-sm {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.7rem;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+
+}
+
+// ============================================
+// CARDS
+// ============================================
+.custom-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 1rem;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--border2);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg3);
+
+    .card-title {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: var(--font-semibold);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+      color: var(--text2);
+    }
+  }
+
+  .card-body {
+    padding: 1rem;
+
+    &.p-0 {
+      padding: 0;
+    }
+  }
+}
+
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--border2);
+  }
+
+  .stat-label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: var(--font-medium);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-value {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: var(--font-semibold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text);
+  }
+}
+
+// ============================================
+// BADGES / TAGS
+// ============================================
+.custom-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+
+  &.badge-success {
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--success);
+  }
+
+  &.badge-warning {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--warning);
+  }
+
+  &.badge-danger {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
+  }
+
+  &.badge-info {
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--info);
+  }
+
+  &.badge-neutral {
+    background: var(--bg3);
+    color: var(--text2);
+  }
+}
+
+// ============================================
+// FORM ELEMENTS (Native)
+// ============================================
+.form-group {
+  margin-bottom: 1rem;
+
+  .form-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: var(--font-medium);
+    color: var(--text2);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+  }
+}
+
+.form-field {
+  margin-bottom: 1rem;
+
+  label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: var(--font-medium);
+    color: var(--text2);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+  }
+
+  &.full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+// ============================================
+// CUSTOM TABS
+// ============================================
+.custom-tabs {
+  display: flex;
+  gap: 0.25rem;
+  background: var(--bg3);
+  padding: 0.25rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  width: fit-content;
+  border: 1px solid var(--border);
+
+  .tab {
+    padding: 0.45rem 0.85rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text2);
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    transition: all 0.15s ease;
+    outline: none;
+
+    &:hover {
+      color: var(--text);
+      background: var(--hover);
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    &.active {
+      background: var(--accent);
+      color: var(--bg);
+    }
+  }
+}
+
+// ============================================
+// TABLE CAPTION (Professional Search & Actions)
+// ============================================
+
+// Override PrimeNG table caption background
+.p-datatable .p-datatable-header {
+  background: var(--card) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border) !important;
+  padding: 0 !important;
+}
+
+.table-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--card);
+
+  .caption-search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.4rem 0.7rem;
+    width: 220px;
+    transition: all 0.2s ease;
+
+    i {
+      font-size: 0.8rem;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: color 0.2s ease;
+    }
+
+    input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-size: 0.8rem;
+      font-family: var(--font-sans);
+      outline: none;
+      min-width: 0;
+      width: 100%;
+
+      &::placeholder {
+        color: var(--muted);
+      }
+    }
+
+    &:hover {
+      border-color: var(--border2);
+    }
+
+    &:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-bg);
+
+      i {
+        color: var(--primary);
+      }
+    }
+  }
+
+  .caption-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .caption-count {
+    font-size: 0.7rem;
+    font-weight: var(--font-medium);
+    color: var(--text2);
+    background: var(--bg3);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+  }
+
+  .caption-pdf-btn,
+  .caption-export-btn {
+    width: 30px !important;
+    height: 30px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none !important;
+    border-radius: var(--radius) !important;
+    transition: all 0.2s ease !important;
+
+    .p-button-icon {
+      font-size: 0.85rem !important;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  .caption-pdf-btn {
+    background: rgba(239, 68, 68, 0.1) !important;
+    color: #ef4444 !important;
+
+    &:hover {
+      background: #ef4444 !important;
+      color: #fff !important;
+    }
+  }
+
+  .caption-export-btn {
+    background: var(--success-bg) !important;
+    color: var(--success) !important;
+
+    &:hover {
+      background: var(--success) !important;
+      color: #fff !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+
+    .caption-search {
+      width: 100%;
+    }
+
+    .caption-actions {
+      justify-content: space-between;
+    }
+  }
+}
+
+// Light mode adjustments for table caption
+.light-mode {
+  .table-caption {
+    .caption-search {
+      background: var(--bg3);
+
+      &:focus-within {
+        background: var(--card);
+      }
+    }
+
+    .caption-count {
+      background: var(--bg3);
+    }
+  }
+}
+
+// ============================================
+// SEARCH BOX (Generic)
+// ============================================
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.75rem;
+  width: 220px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--border2);
+  }
+
+  &:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-bg);
+    background: var(--card);
+  }
+
+  i {
+    font-size: 0.85rem;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 0.85rem;
+    outline: none;
+    font-family: inherit;
+    min-width: 0;
+
+    &::placeholder {
+      color: var(--muted);
+    }
+  }
+}
+
+.light-mode {
+  .search-box {
+    background: var(--card);
+
+    &:focus-within {
+      background: var(--card);
+    }
+  }
+}
+
+// ============================================
+// DIVIDER & SECTION TITLE
+// ============================================
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 1rem 0;
+}
+
+.section-title {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-bottom: 0.65rem;
+  font-weight: 600;
+}
+
+// ============================================
+// TOTALS SECTION
+// ============================================
+.totals-section {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-top: 1rem;
+
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    font-size: 0.8rem;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--border);
+    }
+
+    &.grand {
+      padding-top: 0.75rem;
+      margin-top: 0.5rem;
+      border-top: 2px solid var(--accent);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+  }
+}
+
+// ============================================
+// PACKAGES GRID
+// ============================================
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.package-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--border2);
+  }
+
+  .package-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+
+    h3 {
+      font-size: 1.1rem;
+    }
+  }
+
+  .package-price {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--success);
+  }
+
+  .package-desc {
+    font-size: 0.8rem;
+    color: var(--text2);
+    margin-bottom: 1rem;
+  }
+
+  .package-includes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    .include-item {
+      .include-label {
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .include-value {
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .package-services {
+    .services-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .services-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .service-tag {
+      background: var(--bg3);
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.65rem;
+      color: var(--text2);
+    }
+  }
+
+  .package-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+}
+
+// ============================================
+// SERVICES CHECKBOXES
+// ============================================
+.services-checkboxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.5rem;
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: var(--bg3);
+    border-radius: var(--radius);
+
+    label {
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+  }
+}
+
+// ============================================
+// SERVICE GRID & ITEMS
+// ============================================
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.75rem;
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    border-color: var(--border2);
+  }
+
+  &.selected {
+    border-color: var(--success);
+    background: rgba(34, 197, 94, 0.05);
+  }
+
+  .service-name {
+    flex: 1;
+    font-size: 0.8rem;
+  }
+
+  .service-price {
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--success);
+  }
+}
+
+// ============================================
+// ITEMS CONTAINER (BILLING)
+// ============================================
+.items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.item-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+  padding: 1rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  .item-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 80px 100px 100px;
+    gap: 0.75rem;
+    flex: 1;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: var(--muted);
+
+  p {
+    font-size: 0.85rem;
+  }
+}
+
+// ============================================
+// PRIMENG - GLOBAL COMPONENT FONT
+// ============================================
+.p-component {
+  font-family: var(--font-sans) !important;
+}
+
+// ============================================
+// PRIMENG - INPUT TEXT
+// ============================================
+.p-inputtext,
+input[pInputText] {
+  width: 100%;
+  padding: 0.6rem 0.75rem !important;
+  background: var(--bg3) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  color: var(--text) !important;
+  font-size: 0.85rem !important;
+  font-family: var(--font-sans) !important;
+  transition: border-color 0.15s ease !important;
+
+  &::placeholder {
+    color: var(--muted) !important;
+  }
+
+  &:enabled:hover {
+    border-color: var(--border2) !important;
+  }
+
+  &:enabled:focus {
+    outline: none !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
+  }
+
+  &:disabled {
+    background: var(--bg2) !important;
+    color: var(--muted) !important;
+    cursor: not-allowed;
+    opacity: 1;
+  }
+}
+
+// ============================================
+// PRIMENG - INPUT NUMBER
+// ============================================
+.p-inputnumber {
+  width: 100%;
+
+  .p-inputnumber-input {
+    width: 100%;
+    padding: 0.6rem 0.75rem !important;
+    background: var(--bg3) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    color: var(--text) !important;
+    font-size: 0.85rem !important;
+    font-family: var(--font-sans) !important;
+
+    &:enabled:focus {
+      outline: none !important;
+      border-color: var(--accent) !important;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+
+  .p-inputnumber-button {
+    background: var(--bg3) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text) !important;
+
+    &:hover {
+      background: var(--hover) !important;
+    }
+
+    &:active {
+      background: var(--border) !important;
+    }
+  }
+
+  .p-inputnumber-button-up {
+    border-top-right-radius: var(--radius) !important;
+  }
+
+  .p-inputnumber-button-down {
+    border-bottom-right-radius: var(--radius) !important;
+  }
+}
+
+// ============================================
+// PRIMENG - SELECT / DROPDOWN
+// ============================================
+.p-select,
+.p-dropdown {
+  width: 100%;
+  background: var(--bg3) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  transition: border-color 0.15s ease !important;
+
+  .p-select-label,
+  .p-dropdown-label {
+    padding: 0.6rem 0.75rem !important;
+    color: var(--text) !important;
+    font-size: 0.85rem !important;
+    font-family: var(--font-sans) !important;
+
+    &.p-placeholder {
+      color: var(--muted) !important;
+    }
+  }
+
+  .p-select-trigger,
+  .p-dropdown-trigger {
+    width: 2.5rem;
+    color: var(--muted) !important;
+    background: transparent !important;
+  }
+
+  &:not(.p-disabled):hover {
+    border-color: var(--border2) !important;
+  }
+
+  &:not(.p-disabled).p-focus,
+  &.p-select-open {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+.p-select-overlay,
+.p-dropdown-panel {
+  background: var(--bg2) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+  margin-top: 4px !important;
+
+  .p-select-header,
+  .p-dropdown-header {
+    padding: 0.5rem !important;
+    background: var(--bg3) !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+
+  .p-select-list,
+  .p-dropdown-items {
+    padding: 0.25rem !important;
+  }
+
+  .p-select-option,
+  .p-dropdown-item {
+    padding: 0.6rem 0.75rem !important;
+    color: var(--text) !important;
+    font-size: 0.85rem !important;
+    border-radius: var(--radius-sm) !important;
+    margin: 2px 0 !important;
+    transition: background 0.1s ease !important;
+
+    &:hover {
+      background: var(--bg3) !important;
+    }
+
+    &.p-highlight,
+    &.p-select-option-selected {
+      background: var(--accent) !important;
+      color: var(--bg) !important;
+    }
+  }
+}
+
+// ============================================
+// PRIMENG - TEXTAREA
+// ============================================
+textarea[pTextarea],
+.p-textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem !important;
+  background: var(--bg3) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  color: var(--text) !important;
+  font-size: 0.85rem !important;
+  font-family: var(--font-sans) !important;
+  resize: vertical;
+  min-height: 80px;
+
+  &:enabled:focus {
+    outline: none !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+// ============================================
+// PRIMENG - PASSWORD
+// ============================================
+.p-password {
+  width: 100% !important;
+  display: inline-flex !important;
+  position: relative !important;
+
+  // Input wrapper
+  &.p-inputwrapper {
+    display: inline-flex !important;
+  }
+
+  // The input field
+  input,
+  .p-password-input,
+  .p-inputtext {
+    width: 100% !important;
+    flex: 1 !important;
+    padding: 0.6rem 0.75rem !important;
+    padding-right: 2.75rem !important;
+    background: var(--bg3) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    color: var(--text) !important;
+    font-size: 0.85rem !important;
+    font-family: var(--font-sans) !important;
+
+    &::placeholder {
+      color: var(--muted) !important;
+    }
+
+    &:enabled:hover {
+      border-color: var(--border2) !important;
+    }
+
+    &:enabled:focus {
+      outline: none !important;
+      border-color: var(--primary) !important;
+      box-shadow: 0 0 0 3px var(--primary-bg) !important;
+    }
+
+    &:disabled {
+      background: var(--bg2) !important;
+      color: var(--muted) !important;
+      cursor: not-allowed;
+      opacity: 1;
+    }
+  }
+
+  // The toggle button - use top/transform for vertical centering
+  .p-password-toggle-mask {
+    position: absolute !important;
+    right: 0.75rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: auto !important;
+    height: auto !important;
+    border-radius: var(--radius-sm) !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    color: var(--muted) !important;
+    transition: color 0.15s ease !important;
+    padding: 0.25rem !important;
+    z-index: 1 !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+
+    &:hover {
+      color: var(--text) !important;
+
+      svg,
+      .p-icon {
+        color: var(--text) !important;
+
+        path {
+          fill: var(--text) !important;
+        }
+      }
+    }
+
+    &:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    svg,
+    .p-icon {
+      width: 1rem !important;
+      height: 1rem !important;
+      color: inherit !important;
+      display: block !important;
+
+      path {
+        fill: currentColor !important;
+      }
+    }
+  }
+
+  // Also target the icon directly
+  svg.p-icon,
+  .p-icon {
+    color: var(--muted) !important;
+    width: 1rem !important;
+    height: 1rem !important;
+
+    path {
+      fill: var(--muted) !important;
+    }
+  }
+}
+
+// Ensure full width when used with styleClass
+p-password.w-full,
+p-password[styleclass*="w-full"] {
+  display: block !important;
+  width: 100% !important;
+
+  .p-password {
+    width: 100% !important;
+  }
+}
+
+// Password overlay panel (strength meter + hints)
+.p-password-overlay,
+.p-password-panel {
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-lg) !important;
+  padding: 1rem !important;
+  margin-top: 4px !important;
+
+  // Header text
+  .password-header {
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: var(--text) !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  // Strength meter bar
+  .p-password-meter {
+    background: var(--bg3) !important;
+    border-radius: var(--radius-sm) !important;
+    height: 8px !important;
+    margin-bottom: 0.75rem !important;
+    overflow: hidden !important;
+  }
+
+  // Meter bar fill
+  .p-password-meter-label {
+    height: 100% !important;
+    border-radius: var(--radius-sm) !important;
+    transition: width 0.3s ease, background 0.3s ease !important;
+
+    &.p-password-strength-weak {
+      background: var(--danger) !important;
+    }
+    &.p-password-strength-medium {
+      background: var(--warning) !important;
+    }
+    &.p-password-strength-strong {
+      background: var(--success) !important;
+    }
+  }
+
+  // Divider
+  .p-divider {
+    margin: 0.75rem 0 !important;
+    border-color: var(--border) !important;
+
+    &::before {
+      border-color: var(--border) !important;
+    }
+  }
+
+  // Password hints list
+  .password-hints {
+    margin: 0 !important;
+    padding: 0 0 0 1.25rem !important;
+    list-style: disc !important;
+
+    li {
+      font-size: 0.75rem !important;
+      color: var(--text2) !important;
+      margin-bottom: 0.25rem !important;
+      line-height: 1.4 !important;
+
+      &:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+
+  // Info text
+  .p-password-info {
+    color: var(--text2) !important;
+    font-size: 0.75rem !important;
+  }
+}
+
+// Light mode adjustments for password
+.light-mode {
+  .p-password {
+    input,
+    .p-password-input,
+    .p-inputtext {
+      background: var(--card) !important;
+      border-color: var(--border) !important;
+
+      &:enabled:focus {
+        border-color: var(--primary) !important;
+        box-shadow: 0 0 0 3px var(--primary-bg) !important;
+      }
+    }
+
+    .p-password-toggle-mask-icon,
+    svg.p-icon,
+    .p-icon {
+      color: var(--muted) !important;
+
+      path {
+        fill: var(--muted) !important;
+      }
+
+      &:hover {
+        color: var(--text) !important;
+
+        path {
+          fill: var(--text) !important;
+        }
+      }
+    }
+
+    .p-password-toggle-mask {
+      &:hover {
+        color: var(--text) !important;
+
+        svg,
+        .p-icon {
+          color: var(--text) !important;
+
+          path {
+            fill: var(--text) !important;
+          }
+        }
+      }
+    }
+  }
+
+  .p-password-overlay,
+  .p-password-panel {
+    background: var(--card) !important;
+    box-shadow: var(--shadow-lg) !important;
+    border-color: var(--border) !important;
+  }
+}
+
+// ============================================
+// PRIMENG - DATEPICKER / CALENDAR
+// ============================================
+.p-datepicker,
+.p-calendar {
+  width: 100%;
+
+  .p-datepicker-input,
+  .p-calendar-input {
+    width: 100%;
+    padding: 0.6rem 0.75rem !important;
+    background: var(--bg3) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    color: var(--text) !important;
+    font-size: 0.85rem !important;
+
+    &:enabled:focus {
+      outline: none !important;
+      border-color: var(--accent) !important;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+
+  .p-datepicker-trigger {
+    background: var(--bg3) !important;
+    border: 1px solid var(--border) !important;
+    border-left: none !important;
+    color: var(--muted) !important;
+    border-radius: 0 var(--radius) var(--radius) 0 !important;
+
+    &:hover {
+      background: var(--hover) !important;
+      color: var(--text) !important;
+    }
+  }
+}
+
+.p-datepicker-panel {
+  background: var(--bg2) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+
+  .p-datepicker-header {
+    background: var(--bg3) !important;
+    border-bottom: 1px solid var(--border) !important;
+    padding: 0.75rem !important;
+
+    .p-datepicker-title {
+      color: var(--text) !important;
+      font-weight: 600 !important;
+    }
+
+    .p-datepicker-prev,
+    .p-datepicker-next {
+      color: var(--text2) !important;
+
+      &:hover {
+        background: var(--hover) !important;
+        color: var(--text) !important;
+      }
+    }
+  }
+
+  .p-datepicker-calendar {
+    th {
+      color: var(--muted) !important;
+      font-size: 0.7rem !important;
+      padding: 0.5rem !important;
+    }
+
+    td {
+      padding: 0.25rem !important;
+
+      span {
+        width: 2.25rem !important;
+        height: 2.25rem !important;
+        color: var(--text) !important;
+        border-radius: var(--radius) !important;
+
+        &:hover {
+          background: var(--hover) !important;
+        }
+
+        &.p-highlight {
+          background: var(--accent) !important;
+          color: var(--bg) !important;
+        }
+      }
+
+      &.p-datepicker-today span {
+        border: 1px solid var(--accent) !important;
+      }
+    }
+  }
+}
+
+// ============================================
+// PRIMENG - CHECKBOX
+// ============================================
+.p-checkbox {
+  .p-checkbox-box {
+    width: 18px !important;
+    height: 18px !important;
+    background: var(--bg3) !important;
+    border: 2px solid var(--border2) !important;
+    border-radius: var(--radius-sm) !important;
+    transition: all 0.15s ease !important;
+
+    &:hover {
+      border-color: var(--muted) !important;
+    }
+
+    &.p-highlight {
+      background: var(--accent) !important;
+      border-color: var(--accent) !important;
+
+      .p-checkbox-icon {
+        color: var(--bg) !important;
+      }
+    }
+
+    .p-checkbox-icon {
+      font-size: 0.7rem !important;
+    }
+  }
+}
+
+.p-checkbox-label {
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+// ============================================
+// PRIMENG - BUTTON
+// ============================================
+.p-button {
+  font-family: var(--font-sans) !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  padding: 0.55rem 1rem !important;
+  border-radius: var(--radius) !important;
+  transition: all 0.2s ease !important;
+
+  &.p-button-sm {
+    padding: 0.4rem 0.75rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  &.p-button-text {
+    background: transparent !important;
+    color: var(--text2) !important;
+
+    &:hover {
+      background: var(--hover) !important;
+      color: var(--text) !important;
+    }
+  }
+
+  &.p-button-danger {
+    &.p-button-text {
+      color: var(--danger) !important;
+
+      &:hover {
+        background: var(--danger-bg) !important;
+      }
+    }
+  }
+
+  &.p-button-secondary {
+    background: var(--bg3) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text) !important;
+    box-shadow: var(--shadow-sm) !important;
+
+    &:hover {
+      background: var(--hover) !important;
+      border-color: var(--border2) !important;
+    }
+  }
+
+  &.p-button-primary {
+    background: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: #fff !important;
+    box-shadow: var(--shadow-sm) !important;
+
+    &:hover {
+      filter: brightness(1.1) !important;
+      box-shadow: var(--shadow) !important;
+    }
+  }
+}
+
+// ============================================
+// PRIMENG - TABLE
+// ============================================
+.p-datatable {
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+
+  .p-datatable-thead > tr > th {
+    background: var(--primary) !important;
+    color: #fff !important;
+    font-size: 0.7rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    font-weight: 600 !important;
+    padding: 0.75rem 1rem !important;
+    border: none !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+    transition: background 0.2s ease !important;
+
+    &:last-child {
+      border-right: none !important;
+    }
+
+    &:hover {
+      background: var(--primary-hover) !important;
+    }
+
+    // Sortable column styles
+    &.p-sortable-column {
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
+        background: var(--primary-hover) !important;
+      }
+
+      &.p-highlight {
+        background: var(--primary-hover) !important;
+      }
+    }
+  }
+
+  // Sort icon styling
+  .p-sortable-column-icon,
+  p-sorticon {
+    margin-left: 0.5rem !important;
+
+    .p-icon {
+      width: 0.75rem !important;
+      height: 0.75rem !important;
+      color: rgba(255, 255, 255, 0.5) !important;
+      transition: all 0.2s ease !important;
+    }
+  }
+
+  .p-sortable-column.p-highlight {
+    .p-sortable-column-icon,
+    p-sorticon .p-icon {
+      color: #fff !important;
+    }
+  }
+
+  // Custom sort icon appearance
+  .p-sortable-column-icon {
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+  }
+
+  .p-sortable-column:hover .p-sortable-column-icon,
+  .p-sortable-column.p-highlight .p-sortable-column-icon {
+    opacity: 1;
+  }
+
+  .p-datatable-tbody > tr {
+    background: var(--card) !important;
+    transition: all 0.15s ease !important;
+
+    > td {
+      font-size: 0.8rem !important;
+      padding: 0.65rem 1rem !important;
+      border: none !important;
+      border-bottom: 1px solid var(--border) !important;
+      color: var(--text) !important;
+      vertical-align: middle !important;
+    }
+
+    &:hover {
+      background: var(--hover) !important;
+
+      > td {
+        color: var(--text) !important;
+      }
+    }
+
+    &:last-child > td {
+      border-bottom: none !important;
+    }
+  }
+
+  .p-datatable-emptymessage {
+    td {
+      text-align: center !important;
+      color: var(--muted) !important;
+      padding: 3rem !important;
+      font-style: italic;
+    }
+  }
+}
+
+// ============================================
+// PRIMENG - PAGINATOR (Clean & Simple)
+// ============================================
+.p-paginator {
+  background: var(--card) !important;
+  border: none !important;
+  border-top: 1px solid var(--border) !important;
+  padding: 0.75rem 1rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.25rem !important;
+
+  // Navigation buttons
+  .p-paginator-first,
+  .p-paginator-prev,
+  .p-paginator-next,
+  .p-paginator-last {
+    min-width: 32px !important;
+    width: 32px !important;
+    height: 32px !important;
+    color: var(--text2) !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: var(--radius) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transition: all 0.15s ease !important;
+
+    .p-icon {
+      width: 0.85rem !important;
+      height: 0.85rem !important;
+    }
+
+    &:hover:not(.p-disabled) {
+      background: var(--bg3) !important;
+      color: var(--primary) !important;
+    }
+
+    &.p-disabled {
+      opacity: 0.3 !important;
+      cursor: not-allowed !important;
+    }
+  }
+
+  // Page numbers
+  .p-paginator-pages {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+
+    .p-paginator-page {
+      min-width: 32px !important;
+      width: 32px !important;
+      height: 32px !important;
+      color: var(--text2) !important;
+      background: transparent !important;
+      border: none !important;
+      border-radius: var(--radius) !important;
+      font-size: 0.8rem !important;
+      font-weight: 500 !important;
+      padding: 0 !important;
+      transition: all 0.15s ease !important;
+
+      &:hover {
+        background: var(--bg3) !important;
+        color: var(--primary) !important;
+      }
+
+      &.p-highlight {
+        background: var(--primary) !important;
+        color: #fff !important;
+        font-weight: 600 !important;
+      }
+    }
+  }
+}
+
+// Compact paginator for smaller tables
+.p-datatable-sm .p-paginator {
+  padding: 0.5rem 1rem !important;
+
+  .p-paginator-first,
+  .p-paginator-prev,
+  .p-paginator-next,
+  .p-paginator-last,
+  .p-paginator-page {
+    min-width: 28px !important;
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 0.75rem !important;
+  }
+}
+
+// ============================================
+// PRIMENG - DIALOG
+// ============================================
+.p-dialog {
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+  overflow: hidden !important;
+
+  .p-dialog-header {
+    background: var(--card) !important;
+    border-bottom: 1px solid var(--border) !important;
+    padding: 1rem 1.25rem !important;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0 !important;
+
+    .p-dialog-title {
+      font-family: var(--font-heading) !important;
+      font-size: 1.1rem !important;
+      font-weight: var(--font-semibold) !important;
+      letter-spacing: var(--tracking-tight) !important;
+      color: var(--text) !important;
+    }
+
+    .p-dialog-header-close {
+      color: var(--muted) !important;
+      width: 2rem !important;
+      height: 2rem !important;
+      border-radius: var(--radius) !important;
+      transition: all 0.15s ease !important;
+
+      &:hover {
+        background: var(--hover) !important;
+        color: var(--text) !important;
+      }
+    }
+  }
+
+  .p-dialog-content {
+    background: var(--card) !important;
+    padding: 1.25rem !important;
+    color: var(--text) !important;
+  }
+
+  .p-dialog-footer {
+    background: var(--bg3) !important;
+    border-top: 1px solid var(--border) !important;
+    padding: 0.75rem 1.25rem !important;
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl) !important;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+}
+
+.p-dialog-mask {
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(4px);
+}
+
+// ============================================
+// PRIMENG - CONFIRM DIALOG (Professional)
+// ============================================
+.p-confirmdialog,
+.p-confirm-dialog {
+  max-width: 400px !important;
+
+  .p-dialog-header {
+    padding: 1rem 1.25rem !important;
+    background: var(--card) !important;
+  }
+
+  .p-dialog-content {
+    padding: 1.5rem 1.25rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 1rem !important;
+  }
+
+  // Icon container with background
+  .p-confirmdialog-icon,
+  .p-confirm-dialog-icon {
+    width: 56px !important;
+    height: 56px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    font-size: 1.5rem !important;
+    background: var(--warning-bg) !important;
+    color: var(--warning) !important;
+    flex-shrink: 0 !important;
+
+    &::before {
+      font-size: 1.5rem !important;
+    }
+  }
+
+  // Message text
+  .p-confirmdialog-message,
+  .p-confirm-dialog-message {
+    color: var(--text) !important;
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    max-width: 320px !important;
+  }
+
+  // Footer with buttons
+  .p-dialog-footer {
+    padding: 1rem 1.25rem !important;
+    background: var(--bg3) !important;
+    justify-content: center !important;
+    gap: 0.75rem !important;
+
+    // Reject/Cancel button
+    .p-confirmdialog-reject-button,
+    .p-confirm-dialog-reject {
+      background: transparent !important;
+      border: 1px solid var(--border) !important;
+      color: var(--text2) !important;
+      padding: 0.5rem 1.25rem !important;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      border-radius: var(--radius) !important;
+      transition: all 0.15s ease !important;
+
+      &:hover {
+        background: var(--hover) !important;
+        border-color: var(--border2) !important;
+        color: var(--text) !important;
+      }
+    }
+
+    // Accept/Confirm button (Danger style for delete)
+    .p-confirmdialog-accept-button,
+    .p-confirm-dialog-accept {
+      background: var(--danger) !important;
+      border: 1px solid var(--danger) !important;
+      color: #fff !important;
+      padding: 0.5rem 1.25rem !important;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      border-radius: var(--radius) !important;
+      transition: all 0.15s ease !important;
+
+      &:hover {
+        background: #dc2626 !important;
+        border-color: #dc2626 !important;
+        filter: brightness(1.1) !important;
+      }
+    }
+  }
+}
+
+// Light mode adjustments for confirm dialog
+.light-mode {
+  .p-confirmdialog,
+  .p-confirm-dialog {
+    .p-dialog-footer {
+      background: var(--bg3) !important;
+    }
+
+    .p-confirmdialog-reject-button,
+    .p-confirm-dialog-reject {
+      background: var(--card) !important;
+    }
+  }
+}
+
+// ============================================
+// PRIMENG - TOAST
+// ============================================
+.p-toast {
+  opacity: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+
+  .p-toast-message {
+    margin: 0 !important;
+    background: var(--card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-lg) !important;
+    overflow: hidden;
+
+    .p-toast-message-content {
+      padding: 0.875rem 1rem !important;
+      align-items: flex-start !important;
+      gap: 0.65rem !important;
+    }
+
+    .p-toast-message-icon {
+      font-size: 1.1rem !important;
+      margin-top: 0.1rem !important;
+      flex-shrink: 0 !important;
+    }
+
+    .p-toast-message-text {
+      margin: 0 !important;
+      flex: 1 !important;
+    }
+
+    .p-toast-summary {
+      font-weight: 600 !important;
+      font-size: 0.85rem !important;
+      color: var(--text) !important;
+      display: block !important;
+    }
+
+    .p-toast-detail {
+      font-size: 0.8rem !important;
+      color: var(--text2) !important;
+      margin-top: 0.2rem !important;
+      display: block !important;
+    }
+
+    .p-toast-icon-close {
+      color: var(--muted) !important;
+      width: 1.5rem !important;
+      height: 1.5rem !important;
+      border-radius: var(--radius-sm) !important;
+      transition: all 0.15s ease !important;
+
+      &:hover {
+        background: var(--hover) !important;
+        color: var(--text) !important;
+      }
+    }
+
+    // Success Toast
+    &.p-toast-message-success {
+      border-left: 4px solid var(--success) !important;
+
+      .p-toast-message-icon {
+        color: var(--success) !important;
+      }
+    }
+
+    // Error Toast
+    &.p-toast-message-error {
+      border-left: 4px solid var(--danger) !important;
+
+      .p-toast-message-icon {
+        color: var(--danger) !important;
+      }
+    }
+
+    // Warning Toast
+    &.p-toast-message-warn {
+      border-left: 4px solid var(--warning) !important;
+
+      .p-toast-message-icon {
+        color: var(--warning) !important;
+      }
+    }
+
+    // Info Toast
+    &.p-toast-message-info {
+      border-left: 4px solid var(--info) !important;
+
+      .p-toast-message-icon {
+        color: var(--info) !important;
+      }
+    }
+  }
+}
+
+// ============================================
+// PRIMENG - TAG
+// ============================================
+.p-tag {
+  font-size: 0.65rem !important;
+  font-weight: 600 !important;
+  padding: 0.3rem 0.6rem !important;
+  border-radius: var(--radius) !important;
+  letter-spacing: 0.3px !important;
+
+  &.p-tag-success {
+    background: var(--success-bg) !important;
+    color: var(--success) !important;
+  }
+
+  &.p-tag-warning {
+    background: var(--warning-bg) !important;
+    color: var(--warning) !important;
+  }
+
+  &.p-tag-danger {
+    background: var(--danger-bg) !important;
+    color: var(--danger) !important;
+  }
+
+  &.p-tag-info {
+    background: var(--info-bg) !important;
+    color: var(--info) !important;
+  }
+
+  &.p-tag-secondary {
+    background: var(--bg3) !important;
+    color: var(--text2) !important;
+  }
+
+  &.p-tag-primary {
+    background: var(--primary-bg) !important;
+    color: var(--primary) !important;
+  }
+}
+
+// ============================================
+// PRIMENG - TOOLTIP
+// ============================================
+.p-tooltip {
+  .p-tooltip-text {
+    background: var(--bg2) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text) !important;
+    font-size: 0.75rem !important;
+    padding: 0.5rem 0.75rem !important;
+    border-radius: var(--radius) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .p-tooltip-arrow {
+    border-top-color: var(--border) !important;
+  }
+}
+
+// ============================================
+// UTILITY CLASSES
+// ============================================
+.w-full {
+  width: 100% !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.ml-2 {
+  margin-left: 0.5rem !important;
+}
+
+.mr-2 {
+  margin-right: 0.5rem !important;
+}
+
+.mt-1 {
+  margin-top: 0.25rem !important;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem !important;
+}
+
+// ============================================
+// LOGIN PAGE SPECIFIC
+// ============================================
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg3) 100%);
+}
+
+.login-box {
+  width: 100%;
+  max-width: 380px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+}
+
+.login-logo {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  .icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 1rem;
+    background: var(--accent);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      color: var(--bg);
+    }
+  }
+
+  h1 {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: var(--font-bold);
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    font-family: var(--font-sans);
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: var(--font-normal);
+  }
+}
+
+.btn-login {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-normal);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+// Simple error message - just red text
+.error-message {
+  font-size: 0.7rem;
+  color: var(--danger);
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+// Error box with background (for login page, etc.)
+.error-box {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: var(--danger);
+  padding: 0.65rem;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+// ============================================
+// LIGHT MODE ENHANCEMENTS
+// ============================================
+.light-mode {
+  // Subtle background pattern
+  body {
+    background: var(--bg);
+  }
+
+  // Cards with clean shadows
+  .custom-card {
+    background: var(--card);
+    border-color: var(--border);
+
+    .card-header {
+      background: var(--bg3);
+      border-bottom-color: var(--border);
+    }
+  }
+
+  // Table enhancements
+  .p-datatable {
+    border: 1px solid var(--border);
+
+    .p-datatable-thead > tr > th {
+      background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%) !important;
+      color: #fff !important;
+      border-bottom: none !important;
+    }
+
+    .p-datatable-tbody > tr {
+      &:hover {
+        background: var(--primary-bg) !important;
+      }
+    }
+  }
+
+  // Paginator
+  .p-paginator {
+    background: var(--bg3) !important;
+  }
+
+  // Dialog enhancements
+  .p-dialog {
+    box-shadow: var(--shadow-lg) !important;
+
+    .p-dialog-header {
+      background: var(--card) !important;
+      border-bottom-color: var(--border) !important;
+    }
+  }
+
+  .p-dialog-mask {
+    background: rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(2px);
+  }
+
+  // Input fields
+  .p-inputtext,
+  input[pInputText],
+  .p-select,
+  .p-dropdown {
+    background: var(--card) !important;
+    border-color: var(--border) !important;
+
+    &:enabled:focus,
+    &:not(.p-disabled).p-focus {
+      border-color: var(--primary) !important;
+      box-shadow: 0 0 0 3px var(--primary-bg) !important;
+    }
+  }
+
+  // Dropdown panel
+  .p-select-overlay,
+  .p-dropdown-panel {
+    box-shadow: var(--shadow-lg) !important;
+    background: var(--card) !important;
+  }
+
+  // Login page
+  .login-page {
+    background: linear-gradient(135deg, var(--bg) 0%, var(--bg3) 100%);
+  }
+
+  .login-box {
+    box-shadow: var(--shadow-lg);
+  }
+
+  // Action buttons - violet accent on hover
+  .action-buttons {
+    .p-button-text {
+      &:hover {
+        background: var(--primary-bg) !important;
+        color: var(--primary) !important;
+      }
+    }
+  }
+
+  // Tooltip
+  .p-tooltip .p-tooltip-text {
+    background: var(--text) !important;
+    color: var(--card) !important;
+    box-shadow: var(--shadow-md) !important;
+  }
+}
+
+// ============================================
+// DARK MODE ENHANCEMENTS
+// ============================================
+:root {
+  // Action buttons - accent on hover in dark mode
+  .action-buttons {
+    .p-button-text {
+      &:hover {
+        background: var(--primary-bg) !important;
+        color: var(--accent) !important;
+      }
+    }
+  }
+
+  // Input focus state
+  .p-inputtext:enabled:focus,
+  input[pInputText]:enabled:focus,
+  .p-select:not(.p-disabled).p-focus,
+  .p-dropdown:not(.p-disabled).p-focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px var(--primary-bg) !important;
+  }
+
+  // Dialog backdrop
+  .p-dialog-mask {
+    background: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(4px);
+  }
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+@media (max-width: 768px) {
+  .page-section {
+    padding: 0.75rem;
+  }
+
+  .page-header {
+    .page-title {
+      font-size: 1.25rem;
+    }
+  }
+
+  .custom-tabs {
+    width: 100%;
+    overflow-x: auto;
+
+    .tab {
+      flex-shrink: 0;
+    }
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .packages-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .item-row .item-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+// ============================================
+// PRIMENG - MESSAGE (Minimal Validation Errors)
+// ============================================
+
+// Base Message Styling - Minimal
+.p-message {
+  border: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  margin-top: 0.25rem !important;
+  padding: 0 !important;
+  outline-style:none !important;
+  .p-message-wrapper {
+    padding: 0 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 0.35rem !important;
+  }
+  
+  .p-message-icon {
+    font-size: 0.65rem !important;
+    margin-top: 0.1rem !important;
+    flex-shrink: 0 !important;
+  }
+  
+  .p-message-text {
+    font-size: 0.7rem !important;
+    line-height: 1.2 !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.3px !important;
+  }
+  
+  margin: 0.15rem 0 0 0 !important;
+}
+
+// Error Message - Minimal
+.p-message-error {
+  .p-message-icon,
+  .p-message-text {
+    color: var(--danger) !important;
+  }
+  
+  // Light mode adjustment
+  .light-mode & {
+    .p-message-icon,
+    .p-message-text {
+      color: #dc2626 !important;
+    }
+  }
+}
+
+// Success Message - Minimal
+.p-message-success {
+  .p-message-icon,
+  .p-message-text {
+    color: var(--success) !important;
+  }
+  
+  // Light mode adjustment
+  .light-mode & {
+    .p-message-icon,
+    .p-message-text {
+      color: #16a34a !important;
+    }
+  }
+}
+
+// Warning Message - Minimal
+.p-message-warn {
+  .p-message-icon,
+  .p-message-text {
+    color: var(--warning) !important;
+  }
+  
+  // Light mode adjustment
+  .light-mode & {
+    .p-message-icon,
+    .p-message-text {
+      color: #d97706 !important;
+    }
+  }
+}
+
+// Info Message - Minimal
+.p-message-info {
+  .p-message-icon,
+  .p-message-text {
+    color: var(--info) !important;
+  }
+  
+  // Light mode adjustment
+  .light-mode & {
+    .p-message-icon,
+    .p-message-text {
+      color: #2563eb !important;
+    }
+  }
+}
+
+// ============================================
+// Form Field Validation States (Keep minimal)
+// ============================================
+
+// Error state for input fields when p-message is shown
+.ng-invalid.ng-dirty {
+  border-color: var(--danger) !important;
+  
+  // Light mode adjustment
+  .light-mode & {
+    border-color: #dc2626 !important;
+  }
+}
+
+// Success state for input fields
+.ng-valid.ng-dirty {
+  border-color: var(--success) !important;
+  
+  // Light mode adjustment
+  .light-mode & {
+    border-color: #16a34a !important;
+  }
+}
+
+// ============================================
+// Form Field with Message
+// ============================================
+
+.form-field {
+  // When there's a message
+  &:has(.p-message) {
+    input[pInputText],
+    .p-inputtext,
+    .p-select,
+    .p-dropdown {
+      border-color: var(--danger) !important;
+      
+      // Light mode adjustment
+      .light-mode & {
+        border-color: #dc2626 !important;
+      }
+    }
+  }
+  
+  // Required field indicator
+  .required {
+    color: var(--danger) !important;
+    
+    // Light mode adjustment
+    .light-mode & {
+      color: #dc2626 !important;
+    }
+  }
+}
+
+// ============================================
+// Animation for smooth appearance
+// ============================================
+
+@keyframes fadeInQuick {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.p-message {
+  animation: fadeInQuick 0.15s ease-out;
+}
+
+// ============================================
+// DOT LOADING ANIMATION
+// ============================================
+
+// Keyframes for bouncing dots
+@keyframes dotBounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  40% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+}
+
+// Keyframes for pulsing dots
+@keyframes dotPulse {
+  0%, 100% {
+    transform: scale(0.8);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// Keyframes for fading dots
+@keyframes dotFade {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+// Base dot loader container
+.dot-loader {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    animation: dotBounce 1.2s ease-in-out infinite;
+
+    &:nth-child(1) {
+      animation-delay: 0s;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  }
+
+  // Size variants
+  &.dot-loader-sm {
+    gap: 4px;
+
+    .dot {
+      width: 6px;
+      height: 6px;
+    }
+  }
+
+  &.dot-loader-lg {
+    gap: 8px;
+
+    .dot {
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  // Pulse animation variant
+  &.dot-loader-pulse {
+    .dot {
+      animation: dotPulse 1.2s ease-in-out infinite;
+    }
+  }
+
+  // Fade animation variant
+  &.dot-loader-fade {
+    .dot {
+      animation: dotFade 1.2s ease-in-out infinite;
+    }
+  }
+
+  // Color variants
+  &.dot-loader-light {
+    .dot {
+      background: #fff;
+    }
+  }
+
+  &.dot-loader-muted {
+    .dot {
+      background: var(--muted);
+    }
+  }
+
+  &.dot-loader-success {
+    .dot {
+      background: var(--success);
+    }
+  }
+
+  &.dot-loader-danger {
+    .dot {
+      background: var(--danger);
+    }
+  }
+}
+
+// Full page loading overlay
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(var(--bg), 0.9);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 99999;
+
+  .loading-text {
+    font-size: 0.85rem;
+    color: var(--text2);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+}
+
+// Inline loading state (for buttons, etc.)
+.loading-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .loading-text {
+    font-size: inherit;
+    color: inherit;
+  }
+}
+
+// Card/Section loading state
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 2rem;
+  min-height: 120px;
+
+  .loading-text {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+}
+
+// Button with loading state
+.btn-loading {
+  position: relative;
+  pointer-events: none;
+
+  .btn-text {
+    opacity: 0;
+  }
+
+  .dot-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// ============================================
+// IMAGE UPLOAD (Logo, Signature, etc.)
+// ============================================
+
+// Branding Grid (Logo + Signature side by side)
+.branding-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.upload-item {
+  .upload-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.image-upload-container {
+  width: 100%;
+}
+
+// Upload Area (Empty State)
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  min-height: 180px;
+
+  &:hover {
+    border-color: var(--primary);
+    background: var(--hover);
+
+    .upload-icon-wrapper {
+      transform: translateY(-3px);
+      background: var(--primary);
+      border-color: var(--primary);
+
+      i {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .upload-icon-wrapper {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg2);
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease;
+    border: 1px solid var(--border);
+
+    i {
+      font-size: 24px;
+      color: var(--primary);
+    }
+  }
+
+  .upload-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 4px 0;
+  }
+
+  .upload-hint {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin: 0 0 1rem 0;
+  }
+
+  &.signature-area {
+    min-height: 140px;
+  }
+}
+
+// Preview Area (Image Selected)
+.preview-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg3);
+
+  .image-wrapper {
+    width: 120px;
+    height: 120px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 2px solid var(--border);
+    background: repeating-conic-gradient(var(--bg3) 0% 25%, var(--bg2) 0% 50%) 50% / 12px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .image-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &.signature-preview-area {
+    .signature-wrapper {
+      width: 180px;
+      height: 90px;
+    }
+  }
+}

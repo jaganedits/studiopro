@@ -1,0 +1,299 @@
+// ============================================
+// STUDIO PRO - NETWORK BANNER
+// Clean, professional design matching Studio theme
+// ============================================
+
+.network-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100000;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: slideDown 0.3s ease-out;
+
+  // Hide decorative elements
+  .lights-container,
+  .particles,
+  .tendril-line {
+    display: none;
+  }
+
+  // ========================================
+  // OFFLINE STATE
+  // ========================================
+  &.offline {
+    background: var(--danger);
+
+    .banner-icon svg {
+      color: #fff;
+    }
+
+    .message-title,
+    .message-subtitle {
+      color: #fff;
+    }
+
+    .message-subtitle {
+      opacity: 0.9;
+    }
+
+    .action-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #fff;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+
+  // ========================================
+  // SERVER ERROR STATE
+  // ========================================
+  &.server-error {
+    background: var(--warning);
+
+    .banner-icon svg {
+      color: #fff;
+    }
+
+    .message-title,
+    .message-subtitle {
+      color: #fff;
+    }
+
+    .message-subtitle {
+      opacity: 0.9;
+    }
+
+    .action-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #fff;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+
+  // ========================================
+  // BACK ONLINE STATE
+  // ========================================
+  &.back-online {
+    background: var(--success);
+
+    .banner-icon svg {
+      color: #fff;
+    }
+
+    .message-title,
+    .message-subtitle {
+      color: #fff;
+    }
+
+    .message-subtitle {
+      opacity: 0.9;
+    }
+
+    .action-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #fff;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+}
+
+// ============================================
+// BANNER CONTENT
+// ============================================
+.banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+// ============================================
+// ICON
+// ============================================
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portal-ring {
+  display: none;
+}
+
+.banner-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius);
+
+  svg {
+    width: 18px;
+    height: 18px;
+
+    .strike {
+      stroke-width: 2;
+    }
+  }
+}
+
+// ============================================
+// MESSAGE
+// ============================================
+.banner-message {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.message-title {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+
+  // Remove glitch effect
+  &.glitch {
+    animation: none;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  // Remove glow effect
+  &.glow {
+    animation: none;
+    text-shadow: none;
+  }
+}
+
+.message-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0;
+}
+
+// ============================================
+// ACTION BUTTONS
+// ============================================
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border: 1px solid;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: var(--font-sans);
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.retry-btn {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.dismiss-btn {
+  padding: 0.375rem;
+  border-radius: var(--radius);
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+@media (max-width: 600px) {
+  .network-banner {
+    padding: 0.625rem 0.75rem;
+  }
+
+  .banner-content {
+    gap: 0.625rem;
+  }
+
+  .banner-icon {
+    width: 28px;
+    height: 28px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .message-title {
+    font-size: 0.8rem;
+  }
+
+  .message-subtitle {
+    font-size: 0.7rem;
+  }
+
+  .retry-btn {
+    padding: 0.35rem 0.625rem;
+    font-size: 0.7rem;
+
+    span {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .message-subtitle {
+    display: none;
+  }
+}

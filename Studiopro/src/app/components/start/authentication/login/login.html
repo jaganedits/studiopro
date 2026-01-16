@@ -1,0 +1,39 @@
+<div class="login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+          <circle cx="12" cy="13" r="4" />
+        </svg>
+      </div>
+      <h1>Studio Pro</h1>
+      <p>Complete Billing System</p>
+    </div>
+
+    <form (ngSubmit)="onLogin()">
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input type="text" pInputText [(ngModel)]="username" name="username" class="w-full" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <p-password [(ngModel)]="password" name="password" [feedback]="false" [toggleMask]="true" styleClass="w-full" inputStyleClass="w-full"></p-password>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Branch</label>
+        <p-select [(ngModel)]="selectedBranch" name="branch" [options]="branches" optionLabel="label" optionValue="value" styleClass="w-full"></p-select>
+      </div>
+
+      @if (errorMessage) {
+        <div class="error-message">{{ errorMessage }}</div>
+      }
+
+      <button type="submit" class="btn-login">Sign In</button>
+    </form>
+
+    <div class="login-footer">Demo: admin / admin123</div>
+  </div>
+</div>

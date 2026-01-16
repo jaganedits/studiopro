@@ -1,0 +1,394 @@
+<div class="page-container">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="header-left">
+            <button class="btn-back" (click)="goBack()">
+                <i class="pi pi-arrow-left"></i>
+            </button>
+            <div class="header-title">
+                <h1>{{ isEditMode ? 'Edit User' : 'Create User' }}</h1>
+                <span class="header-subtitle">{{ isEditMode ? 'Update user information' : 'Add a new user to the system' }}</span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <p-button label="Clear" icon="pi pi-eraser" severity="secondary" [outlined]="true" (click)="clearForm()">
+            </p-button>
+            <p-button label="Cancel" icon="pi pi-times" severity="secondary" [outlined]="true" (click)="goBack()">
+            </p-button>
+            <p-button label="Save User" icon="pi pi-check" severity="primary" (click)="saveUser()" [loading]="isSaving">
+            </p-button>
+        </div>
+    </div>
+
+    <!-- Form Content -->
+    <form [formGroup]="userForm" class="form-content">
+        <div class="form-layout">
+            <!-- Left Column -->
+            <div class="form-column">
+                <!-- Profile Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="pi pi-user"></i>
+                        <span>Profile Picture</span>
+                    </div>
+                    <div class="section-body">
+                        <div class="profile-upload-container">
+                            <!-- No Image State -->
+                            <div class="profile-upload-area" *ngIf="!profilePreviewUrl && !isViewMode">
+                                <div class="upload-placeholder" (click)="fileInput.click()">
+                                    <div class="upload-icon-wrapper">
+                                        <i class="pi pi-cloud-upload"></i>
+                                    </div>
+                                    <p class="upload-title">Upload Profile Picture</p>
+                                    <p class="upload-hint">JPG, PNG (Max: 2MB, Min: 140x60px)</p>
+                                    <p-button label="Choose Image" icon="pi pi-image" severity="secondary"
+                                        [outlined]="true" size="small"
+                                        (click)="$event.stopPropagation(); fileInput.click()">
+                                    </p-button>
+                                </div>
+                                <input type="file" #fileInput accept="image/png,image/jpeg,image/jpg"
+                                    (change)="onFileSelected($event)" style="display: none;" />
+                            </div>
+
+                            <!-- Image Preview State -->
+                            <div class="profile-preview-area" *ngIf="profilePreviewUrl">
+                                <div class="image-wrapper">
+                                    <img [src]="profilePreviewUrl" alt="Profile Preview" class="profile-image" />
+                                </div>
+                                <div class="image-actions" *ngIf="!isViewMode">
+                                    <p-button icon="pi pi-trash" severity="danger" [outlined]="true" size="small"
+                                        pTooltip="Remove Photo" tooltipPosition="top" (click)="removePhoto()">
+                                    </p-button>
+                                </div>
+                            </div>
+
+                            <!-- View Mode - No Image -->
+                            <div class="no-image-view" *ngIf="!profilePreviewUrl && isViewMode">
+                                <div class="no-image-placeholder">
+                                    <i class="pi pi-user"></i>
+                                    <p>No Profile Picture</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Organization Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="pi pi-building"></i>
+                        <span>Organization Details</span>
+                    </div>
+                    <div class="section-body">
+                        <div class="form-grid">
+                            <!-- Company -->
+                            <div class="form-group">
+                                <label for="CompanyId">Company <span class="required">*</span></label>
+                                <p-select id="CompanyId" formControlName="CompanyId" [options]="companyList"
+                                    optionLabel="label" optionValue="value" placeholder="Select Company"
+                                    styleClass="w-full">
+                                </p-select>
+                                <small class="error-message"
+                                    *ngIf="userForm.get('CompanyId')?.invalid && userForm.get('CompanyId')?.touched">
+                                    <span *ngIf="userForm.get('CompanyId')?.errors?.['required']">Company is required</span>
+                                </small>
+                            </div>
+
+                            <!-- Branch -->
+                            <div class="form-group">
+                                <label for="BranchId">Branch <span class="required">*</span></label>
+                                <p-select id="BranchId" formControlName="BranchId" [options]="branchList"
+                                    optionLabel="label" optionValue="value" placeholder="Select Branch"
+                                    styleClass="w-full">
+                                </p-select>
+                                <small class="error-message"
+                                    *ngIf="userForm.get('BranchId')?.invalid && userForm.get('BranchId')?.touched">
+                                    <span *ngIf="userForm.get('BranchId')?.errors?.['required']">Branch is required</span>
+                                </small>
+                            </div>
+
+                            <!-- Role -->
+                            <div class="form-group">
+                                <label for="RoleId">Role <span class="required">*</span></label>
+                                <p-select id="RoleId" formControlName="RoleId" [options]="roleList" optionLabel="label"
+                                    optionValue="value" placeholder="Select Role" styleClass="w-full">
+                                </p-select>
+                                <small class="error-message"
+                                    *ngIf="userForm.get('RoleId')?.invalid && userForm.get('RoleId')?.touched">
+                                    <span *ngIf="userForm.get('RoleId')?.errors?.['required']">Role is required</span>
+                                </small>
+                            </div>
+
+                            <!-- Status -->
+                            <div class="form-group">
+                                <label for="Status">Status <span class="required">*</span></label>
+                                <p-select id="Status" formControlName="Status" [options]="statusList"
+                                    optionLabel="label" optionValue="value" placeholder="Select Status"
+                                    styleClass="w-full">
+                                </p-select>
+                                <small class="error-message"
+                                    *ngIf="userForm.get('Status')?.invalid && userForm.get('Status')?.touched">
+                                    <span *ngIf="userForm.get('Status')?.errors?.['required']">Status is required</span>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="form-column">
+                <!-- Basic Information Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="pi pi-info-circle"></i>
+                        <span>Basic Information</span>
+                    </div>
+                    <div class="section-body">
+                        <div class="form-grid">
+                            <!-- Username -->
+                            <div class="form-group">
+                                <label for="Username">Username <span class="required">*</span></label>
+                                <input pInputText id="Username" formControlName="Username" placeholder="Enter username"
+                                    autocomplete="username" />
+                                <small class="error-message"
+                                    *ngIf="userForm.get('Username')?.invalid && userForm.get('Username')?.touched">
+                                    <span *ngIf="userForm.get('Username')?.errors?.['required']">Username is required</span>
+                                    <span *ngIf="userForm.get('Username')?.errors?.['minlength']">Minimum 3 characters</span>
+                                    <span *ngIf="userForm.get('Username')?.errors?.['maxlength']">Maximum 50 characters</span>
+                                </small>
+                            </div>
+
+                            <!-- Full Name -->
+                            <div class="form-group">
+                                <label for="FullName">Full Name <span class="required">*</span></label>
+                                <input pInputText id="FullName" formControlName="FullName" placeholder="Enter full name"
+                                    autocomplete="name" />
+                                <small class="error-message"
+                                    *ngIf="userForm.get('FullName')?.invalid && userForm.get('FullName')?.touched">
+                                    <span *ngIf="userForm.get('FullName')?.errors?.['required']">Full name is required</span>
+                                    <span *ngIf="userForm.get('FullName')?.errors?.['maxlength']">Maximum 100 characters</span>
+                                </small>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="form-group full-width">
+                                <label for="PasswordHash">Password <span class="required">*</span></label>
+                                <p-password id="PasswordHash" formControlName="PasswordHash" appendTo="body"
+                                    placeholder="Enter password" [toggleMask]="true" [feedback]="true"
+                                    styleClass="w-full" autocomplete="new-password">
+                                    <ng-template pTemplate="header">
+                                        <div class="password-header">Pick a password</div>
+                                    </ng-template>
+                                    <ng-template pTemplate="footer">
+                                        <p-divider />
+                                        <ul class="password-hints">
+                                            <li>At least one lowercase</li>
+                                            <li>At least one uppercase</li>
+                                            <li>At least one numeric</li>
+                                            <li>Minimum 6 characters</li>
+                                        </ul>
+                                    </ng-template>
+                                </p-password>
+                                <small class="error-message"
+                                    *ngIf="userForm.get('PasswordHash')?.invalid && userForm.get('PasswordHash')?.touched">
+                                    <span *ngIf="userForm.get('PasswordHash')?.errors?.['required']">Password is required</span>
+                                    <span *ngIf="userForm.get('PasswordHash')?.errors?.['minlength']">Minimum 6 characters</span>
+                                </small>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label for="Email">Email</label>
+                                <input pInputText id="Email" formControlName="Email" type="email"
+                                    placeholder="user@example.com" autocomplete="email" />
+                                <small class="error-message"
+                                    *ngIf="userForm.get('Email')?.invalid && userForm.get('Email')?.touched">
+                                    <span *ngIf="userForm.get('Email')?.errors?.['email']">Invalid email format</span>
+                                </small>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="form-group">
+                                <label for="Phone">Phone</label>
+                                <input pInputText id="Phone" formControlName="Phone" placeholder="+1 (123) 456-7890"
+                                    autocomplete="tel" />
+                                <small class="error-message"
+                                    *ngIf="userForm.get('Phone')?.invalid && userForm.get('Phone')?.touched">
+                                    <span *ngIf="userForm.get('Phone')?.errors?.['maxlength']">Maximum 20 characters</span>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preferences Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="pi pi-palette"></i>
+                        <span>Preferences</span>
+                    </div>
+                    <div class="section-body">
+                        <div class="form-grid">
+                            <!-- Theme -->
+                            <div class="form-group">
+                                <label for="Theme">Theme</label>
+                                <p-select id="Theme" formControlName="Theme" [options]="themeList"
+                                    optionLabel="label" optionValue="value" placeholder="Select Theme"
+                                    styleClass="w-full">
+                                </p-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="pi pi-shield"></i>
+                        <span>Security Settings</span>
+                    </div>
+                    <div class="section-body">
+                        <div class="form-grid">
+                            <!-- Is Locked -->
+                            <div class="form-group">
+                                <label for="IsLocked">Account Locked</label>
+                                <div class="checkbox-wrapper">
+                                    <p-checkbox formControlName="IsLocked" [binary]="true" inputId="IsLocked"></p-checkbox>
+                                    <label for="IsLocked" class="checkbox-label">Lock this account</label>
+                                </div>
+                            </div>
+
+                            <!-- Must Change Password -->
+                            <div class="form-group">
+                                <label for="MustChangePassword">Password Policy</label>
+                                <div class="checkbox-wrapper">
+                                    <p-checkbox formControlName="MustChangePassword" [binary]="true" inputId="MustChangePassword"></p-checkbox>
+                                    <label for="MustChangePassword" class="checkbox-label">Must change password on next login</label>
+                                </div>
+                            </div>
+
+                            <!-- Failed Login Attempts -->
+                            <div class="form-group">
+                                <label for="FailedLoginAttempts">Failed Login Attempts</label>
+                                <p-inputNumber id="FailedLoginAttempts" formControlName="FailedLoginAttempts"
+                                    [min]="0" [max]="99" [showButtons]="true" styleClass="w-full"
+                                    [disabled]="!isEditMode">
+                                </p-inputNumber>
+                            </div>
+
+                            <!-- Login Expiry Days -->
+                            <div class="form-group">
+                                <label for="LoginExpiryDays">Login Expires In (Days)</label>
+                                <p-inputNumber id="LoginExpiryDays" formControlName="LoginExpiryDays"
+                                    [min]="1" [max]="365" [showButtons]="true" styleClass="w-full"
+                                    placeholder="30">
+                                </p-inputNumber>
+                                <small class="hint-text">Session will expire after this many days of inactivity</small>
+                            </div>
+
+                            <!-- Lockout End Date -->
+                            <div class="form-group" *ngIf="isEditMode && userForm.get('LockoutEndDate')?.value">
+                                <label for="LockoutEndDate">Lockout Expires</label>
+                                <input pInputText id="LockoutEndDate" formControlName="LockoutEndDate" [readonly]="true" />
+                            </div>
+
+                            <!-- Password Changed Date -->
+                            <div class="form-group" *ngIf="isEditMode && userForm.get('PasswordChangedDate')?.value">
+                                <label for="PasswordChangedDate">Password Last Changed</label>
+                                <input pInputText id="PasswordChangedDate" formControlName="PasswordChangedDate" [readonly]="true" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Footer Actions (Mobile) -->
+    <div class="footer-actions">
+        <p-button label="Cancel" icon="pi pi-times" severity="secondary" [outlined]="true" (click)="goBack()"
+            styleClass="flex-1">
+        </p-button>
+        <p-button label="Save User" icon="pi pi-check" severity="primary" (click)="saveUser()" [loading]="isSaving"
+            styleClass="flex-1">
+        </p-button>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- IMAGE CROPPER DIALOG -->
+<!-- ============================================ -->
+<p-dialog header="Crop Profile Picture" [(visible)]="showImageCropper" [modal]="true"
+    [style]="{ width: '700px', maxWidth: '95vw' }" [baseZIndex]="10000" [closable]="true" [draggable]="false"
+    [resizable]="false" styleClass="cropper-dialog">
+
+    <!-- Cropper Toolbar -->
+    <div class="cropper-toolbar">
+        <div class="toolbar-group">
+            <button type="button" class="toolbar-btn" pTooltip="Zoom In" tooltipPosition="top" (click)="zoomIn()">
+                <i class="pi pi-search-plus"></i>
+            </button>
+            <button type="button" class="toolbar-btn" pTooltip="Zoom Out" tooltipPosition="top" (click)="zoomOut()">
+                <i class="pi pi-search-minus"></i>
+            </button>
+            <span class="toolbar-divider"></span>
+            <button type="button" class="toolbar-btn" pTooltip="Rotate Left" tooltipPosition="top" (click)="rotateLeft()">
+                <i class="pi pi-undo"></i>
+            </button>
+            <button type="button" class="toolbar-btn" pTooltip="Rotate Right" tooltipPosition="top" (click)="rotateRight()">
+                <i class="pi pi-refresh"></i>
+            </button>
+        </div>
+        <div class="toolbar-group">
+            <button type="button" class="toolbar-btn btn-reset" pTooltip="Reset Image" tooltipPosition="top" (click)="resetCropper()">
+                <i class="pi pi-sync"></i>
+                <span>Reset</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Cropper Content -->
+    <div class="cropper-content">
+        <!-- Input Section (Image Cropper) -->
+        <div class="cropper-input">
+            <h5 class="section-label">Original</h5>
+            <div class="crop-area">
+                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                    [containWithinAspectRatio]="containWithinAspectRatio" [aspectRatio]="1 / 1" [resizeToWidth]="200"
+                    [cropperMinWidth]="100" [onlyScaleDown]="true" [roundCropper]="false"
+                    [canvasRotation]="canvasRotation" [transform]="transform" [alignImage]="'center'"
+                    [style.display]="showCropper ? null : 'none'" format="png" (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady($event)"
+                    (loadImageFailed)="loadImageFailed()">
+                </image-cropper>
+            </div>
+        </div>
+
+        <!-- Output Section (Preview) -->
+        <div class="cropper-output">
+            <h5 class="section-label">Preview</h5>
+            <div class="preview-area">
+                <img [src]="croppedImage" *ngIf="croppedImage" class="cropped-preview" alt="Cropped Preview" />
+                <div *ngIf="!croppedImage" class="preview-placeholder">
+                    <i class="pi pi-image"></i>
+                    <span>Crop the image to see preview</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dialog Footer -->
+    <ng-template pTemplate="footer">
+        <div class="dialog-footer">
+            <p-button label="Cancel" icon="pi pi-times" severity="secondary" [outlined]="true" (onClick)="cancelCrop()">
+            </p-button>
+            <p-button label="Apply" icon="pi pi-check" severity="primary" (onClick)="applyCrop()"
+                [disabled]="!croppedImage">
+            </p-button>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<!-- Toast Messages -->
+<p-toast position="bottom-right" key="br"></p-toast>
