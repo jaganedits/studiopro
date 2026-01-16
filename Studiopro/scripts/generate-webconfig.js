@@ -17,6 +17,11 @@ const webConfig = `<?xml version="1.0" encoding="utf-8"?>
       </rules>
     </rewrite>
     <staticContent>
+      <!-- Remove existing definitions before adding them -->
+      <remove fileExtension=".json" />
+      <remove fileExtension=".woff" />
+      <remove fileExtension=".woff2" />
+      <!-- Now define them safely -->
       <mimeMap fileExtension=".json" mimeType="application/json" />
       <mimeMap fileExtension=".woff" mimeType="font/woff" />
       <mimeMap fileExtension=".woff2" mimeType="font/woff2" />
