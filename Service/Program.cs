@@ -114,19 +114,20 @@ builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailS
 
 builder.Services.AddWkhtmltopdf();
 
+// Add CORS services
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(
         "AllowAllHeaders",
-        builder =>
+        policy =>
         {
-            builder
-                .WithOrigins(
-                    "http://localhost:4200",
-                    "http://localhost:5001"
-                )
-                .AllowAnyHeader()
+            // Allow all origins (or specify your origins)
+            policy.AllowAnyOrigin()
+                // Allow all HTTP methods
                 .AllowAnyMethod()
+                // Allow all headers
+                .AllowAnyHeader()
+                // Allow credentials
                 .AllowCredentials();
         }
     );
